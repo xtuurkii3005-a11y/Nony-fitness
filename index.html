@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09060f">
+<meta name="description" content="Nony — Fitness & Nutrition Dashboard">
+<title>Nony • Fitness & Nutrition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+:root{
+  --bg:#08050d;--bg2:#110a18;--panel:rgba(25,14,35,.78);--panel2:rgba(44,24,58,.62);
+  --text:#fff;--muted:#b9a9c1;--line:rgba(219,160,255,.20);--purple:#a84cff;--pink:#e14cf1;
+  --green:#72e6b5;--red:#ff719b;--shadow:0 24px 70px rgba(0,0,0,.45);--radius:24px
+}
+[data-theme="light"]{
+ --bg:#f8f5fb;--bg2:#fff;--panel:rgba(255,255,255,.82);--panel2:rgba(247,239,252,.85);
+ --text:#21182a;--muted:#75677c;--line:rgba(122,62,156,.18);--shadow:0 18px 55px rgba(70,30,90,.14)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Cairo,system-ui,sans-serif;background:var(--bg);overflow-x:hidden}
+button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+body:before{content:"";position:fixed;inset:-12%;z-index:-4;background:
+radial-gradient(circle at 10% 15%,#8529b9 0,transparent 23%),
+radial-gradient(circle at 92% 18%,#cf3e91 0,transparent 19%),
+radial-gradient(circle at 50% 100%,#3b1c80 0,transparent 30%),var(--bg);animation:ambient 16s ease-in-out infinite alternate}
+@keyframes ambient{to{transform:scale(1.08) translate(1%,-1%)}}body:after{content:"";position:fixed;inset:0;z-index:-3;background:linear-gradient(110deg,#000b,transparent 45%,#0007);pointer-events:none}
+[data-theme="light"] body:after{background:linear-gradient(110deg,#fff7,transparent 50%,#fff6)}
+a{color:inherit}.glass{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.08);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.wrap{width:min(1180px,100%);margin:auto;padding:16px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.brand{font-weight:800;font-size:23px;line-height:1}.brand span{background:linear-gradient(90deg,#fff,#d88cff);-webkit-background-clip:text;color:transparent}.brand small{display:block;color:var(--muted);font-size:8px;font-weight:500;letter-spacing:1.4px;margin-top:6px}
+.btn{border:0;border-radius:14px;padding:11px 16px;color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink));font-weight:800;box-shadow:0 12px 30px #9d4cff35}.btn.secondary{background:#ffffff08;border:1px solid var(--line);box-shadow:none;color:var(--text)}.btn.danger{background:#ff4f8140;border:1px solid #ff709a55;color:#ffdbe6}.btn.small{font-size:9px;padding:8px 11px;border-radius:11px}
+.iconbtn{width:43px;height:43px;border-radius:14px;border:1px solid var(--line);background:#ffffff08;color:var(--text);display:grid;place-items:center}
+.page{display:none;min-height:100vh}.page.active{display:block}
+#landing{min-height:100vh;display:none;align-items:center}.landingCard{width:min(430px,100%);min-height:720px;margin:auto;border-radius:34px;overflow:hidden;position:relative;padding:28px;display:flex;align-items:flex-end}
+.landingBg{position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1400&q=88") center/cover;filter:saturate(1.1);animation:heroZoom 13s ease-in-out infinite alternate}
+@keyframes heroZoom{to{transform:scale(1.06)}}.landingShade{position:absolute;inset:0;background:linear-gradient(180deg,#08050d15 10%,#08050d55 45%,#08050df2 78%,#08050d 100%)}
+.landingContent{position:relative;z-index:2;width:100%}.nonyWord{font-size:64px;font-weight:800;font-style:italic;line-height:.8;text-shadow:0 0 35px #d35bff}.tag{color:#d891ff;font-size:13px;letter-spacing:2px;margin-top:12px}.landingContent h1{font-size:25px;line-height:1.55;margin:28px 0 8px}.landingContent p{font-size:10px;color:#ddd0e2;line-height:2}.landingActions{display:grid;gap:8px;margin-top:17px}.social{display:flex;justify-content:center;gap:8px;margin-top:12px}.social button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#ffffff08;color:#fff}
+.auth{width:min(460px,100%);margin:45px auto;padding:24px;border-radius:28px}.auth h2{margin:0;font-size:22px}.auth p{color:var(--muted);font-size:9px;line-height:1.9}.field{margin:12px 0}.field label{display:block;color:var(--muted);font-size:9px;margin:0 4px 5px}.input,.select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:#ffffff08;color:var(--text);outline:none}.select option{background:#180c20}.switch{text-align:center;color:var(--muted);font-size:9px;margin-top:13px}.switch b{color:#d78aff;cursor:pointer}.notice{font-size:8px;color:var(--muted);padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#ffffff05;line-height:1.8}
+.layout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:13px;direction:ltr}.sidebar{direction:rtl;border-radius:25px;padding:12px;min-height:calc(100vh - 86px);position:sticky;top:12px;align-self:start}.profile{padding:10px 8px 15px;border-bottom:1px solid var(--line);margin-bottom:8px}.avatar{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--pink));display:grid;place-items:center;font-weight:800;font-size:18px}.profileRow{display:flex;gap:9px;align-items:center}.profile b{font-size:10px}.profile small{display:block;color:var(--muted);font-size:7px}.nav button{width:100%;border:0;background:transparent;color:var(--muted);padding:11px;border-radius:12px;text-align:right;font-size:10px}.nav button:hover,.nav button.active{background:linear-gradient(90deg,#a84cff35,#e14cf118);color:var(--text)}
+.main{direction:rtl;min-width:0}.heroDash{min-height:245px;border-radius:27px;padding:22px;position:relative;overflow:hidden}.heroDash:after{content:"";position:absolute;inset:0 0 0 43%;background:url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1100&q=86") center/cover;opacity:.36;mask-image:linear-gradient(90deg,transparent,#000)}
+.heroCopy{position:relative;z-index:2;max-width:650px}.hello{font-size:9px;color:#d48cff}.heroDash h1{font-size:29px;line-height:1.45;margin:8px 0}.heroDash p{font-size:9px;color:var(--muted);line-height:2;max-width:580px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:10px}.stat{border-radius:20px;padding:14px;min-height:135px}.statTop{display:flex;justify-content:space-between;align-items:center}.ico{width:38px;height:38px;border-radius:12px;background:#ffffff08;display:grid;place-items:center}.stat small{display:block;color:var(--muted);font-size:8px;margin-top:8px}.stat b{display:block;font-size:21px;margin-top:3px}.bar{height:5px;border-radius:10px;background:#ffffff0b;overflow:hidden;margin-top:9px}.bar i{display:block;height:100%;width:0;border-radius:10px;background:linear-gradient(90deg,var(--purple),var(--pink));transition:width .35s}
+.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:10px;margin-top:10px}.panel{border-radius:22px;padding:15px}.panelHead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.panelHead strong{font-size:13px}.panelHead span{font-size:8px;color:var(--muted)}
+.meal{display:flex;align-items:center;gap:9px;padding:8px;border:1px solid var(--line);background:#ffffff05;border-radius:14px;margin:6px 0}.meal img{width:58px;height:58px;border-radius:12px;object-fit:cover;background:#2b1537}.mealBody{flex:1;min-width:0}.mealBody b{font-size:9px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mealBody small{display:block;color:var(--muted);font-size:7px;margin-top:3px}.mealKcal{font-size:8px;white-space:nowrap}.trash{border:0;background:transparent;color:#bdaec4;font-size:18px}.empty{text-align:center;color:var(--muted);font-size:9px;padding:28px 10px}
+.ring{width:132px;height:132px;margin:6px auto 13px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--purple) 0 0%,#ffffff0d 0 100%)}.ring:after{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--bg2)}.ringInner{position:relative;z-index:2;text-align:center}.ringInner b{font-size:24px}.ringInner small{display:block;color:var(--muted);font-size:8px}.waterLine{display:flex;justify-content:space-between;align-items:center;font-size:8px}.cups{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:10px}.cup{height:28px;border:1px solid #b86bff45;border-radius:5px 5px 8px 8px;background:linear-gradient(180deg,transparent 32%,#a84cff 33%);opacity:.25}.cup.full{opacity:1}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quickBox{padding:12px;border-radius:16px;border:1px solid var(--line);background:#ffffff05}.quickBox small{font-size:7px;color:var(--muted)}.quickBox b{display:block;font-size:18px;margin-top:5px}
+.chart{height:180px;display:flex;align-items:flex-end;gap:8px;padding:16px 4px 4px}.barDay{flex:1;min-width:10px;border-radius:9px 9px 3px 3px;background:linear-gradient(180deg,#d96df7,#7e40c5);height:15%;position:relative}.barDay span{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:7px;color:var(--muted)}
+.settingsGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.settingCard{padding:14px;border:1px solid var(--line);border-radius:17px;background:#ffffff05}.settingCard b{font-size:10px}.settingCard p{font-size:8px;color:var(--muted);line-height:1.8}.rowBtns{display:flex;gap:7px;flex-wrap:wrap}
+.bottomNav{display:none;position:fixed;z-index:20;bottom:9px;left:9px;right:9px;height:61px;border-radius:20px;align-items:center;justify-content:space-around}.bottomNav button{border:0;background:transparent;color:var(--muted);font-size:18px}.bottomNav .plus{width:47px;height:47px;border-radius:15px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff}
+.modal{display:none;position:fixed;z-index:80;inset:0;background:#000c;backdrop-filter:blur(13px);align-items:center;justify-content:center;padding:15px}.modal.show{display:flex}.modalBox{width:min(510px,100%);max-height:92vh;overflow:auto;border-radius:25px;padding:20px}.modalBox h3{margin:0 0 13px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.full{grid-column:1/-1}.modalBtns{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.preview{width:100%;height:120px;object-fit:cover;border-radius:15px;border:1px dashed var(--line);margin-top:8px;background:#ffffff05}.drop{border:1px dashed var(--line);border-radius:14px;padding:14px;text-align:center;color:var(--muted);font-size:8px;cursor:pointer}
+.toast{position:fixed;z-index:100;bottom:18px;left:50%;transform:translate(-50%,30px);opacity:0;background:#24112d;border:1px solid var(--line);padding:10px 16px;border-radius:13px;font-size:9px;transition:.25s;box-shadow:var(--shadow)}.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){
+ .wrap{padding:10px}.layout{display:block}.sidebar{display:none}.bottomNav{display:flex}.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.heroDash{min-height:270px}.heroDash:after{inset:0;opacity:.24}.settingsGrid{grid-template-columns:1fr}.heroDash h1{font-size:24px}.main{padding-bottom:75px}
+}
+@media(max-width:460px){.landingCard{min-height:700px;border-radius:28px}.nonyWord{font-size:58px}.formGrid{grid-template-columns:1fr}.full{grid-column:auto}.stats{gap:7px}.stat{padding:11px;min-height:125px}.stat b{font-size:18px}}
+</style>
+</head>
+<body>
+
+<section id="landing" class="page">
+ <div class="wrap" style="width:100%">
+  <div class="landingCard">
+   <div class="landingBg"></div><div class="landingShade"></div>
+   <div class="landingContent">
+    <div class="nonyWord">Nony</div><div class="tag">FITNESS & NUTRITION</div>
+    <h1>كوني أقوى، أهدأ<br>وأفضل كل يوم.</h1>
+    <p>وجباتك، سعراتك، الماء، الخطوات والماكروز — كلها في لوحة واحدة بتصميم أنيق مخصص لنوني.</p>
+    <div class="landingActions">
+      <button class="btn" onclick="showPage('signup')">إنشاء حساب ✨</button>
+      <button class="btn secondary" onclick="showPage('login')">تسجيل الدخول</button>
+    </div>
+    <div class="social"><button></button><button>G</button><button>✉</button></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="signup" class="page">
+ <div class="wrap">
+  <div class="topbar"><div class="brand">Nony <span>Nutrition</span><small>FITNESS • FOOD • WELLNESS</small></div><button class="btn secondary small" onclick="showPage('landing')">رجوع</button></div>
+  <div class="auth glass">
+   <h2>ابدئي رحلة نوني 💜</h2><p>أدخلي بياناتك حتى نحسب احتياجك اليومي بشكل شخصي وفق معادلة Mifflin-St Jeor.</p>
+   <div class="field"><label>الاسم</label><input id="suName" class="input" value="نوني" placeholder="نوني"></div>
+   <div class="field"><label>البريد الإلكتروني</label><input id="suEmail" class="input" type="email" placeholder="name@email.com"></div>
+   <div class="field"><label>كلمة المرور</label><input id="suPass" class="input" type="password" placeholder="••••••••"></div>
+   <div class="field"><label>العمر</label><input id="suAge" class="input" type="number" min="13" max="100" placeholder="24"></div>
+   <div class="field"><label>الوزن (kg)</label><input id="suWeight" class="input" type="number" step="0.1" placeholder="60"></div>
+   <div class="field"><label>الطول (cm)</label><input id="suHeight" class="input" type="number" step="0.1" placeholder="165"></div>
+   <div class="field"><label>مستوى النشاط</label><select id="suActivity" class="select"><option value="1.2">قليل جداً — نشاط يومي منخفض</option><option value="1.375">خفيف — 1 إلى 3 أيام</option><option value="1.55" selected>متوسط — 3 إلى 5 أيام</option><option value="1.725">عالٍ — 6 إلى 7 أيام</option><option value="1.9">عالٍ جداً — تدريب شاق/عمل بدني</option></select></div>
+   <div class="field"><label>الهدف</label><select id="suGoal" class="select"><option value="loss">خسارة الدهون</option><option value="maintain" selected>تثبيت الوزن</option><option value="gain">زيادة العضلات/الوزن</option></select></div>
+   <div class="notice">الحسبة تقديرية وليست تشخيصاً طبياً. السعرات المستهلكة من الطعام تعتمد على دقة بيانات الوجبة وحجم الحصة.</div>
+   <button class="btn" style="width:100%;margin-top:12px" onclick="signup()">إنشاء الحساب والدخول 🚀</button>
+   <div class="switch">عندك حساب؟ <b onclick="showPage('login')">تسجيل الدخول</b></div>
+  </div>
+ </div>
+</section>
+
+<section id="login" class="page">
+ <div class="wrap">
+  <div class="topbar"><div class="brand">Nony <span>Nutrition</span><small>FITNESS • FOOD • WELLNESS</small></div><button class="btn secondary small" onclick="showPage('landing')">رجوع</button></div>
+  <div class="auth glass">
+   <h2>أهلاً بعودتك 💜</h2><p>سجلي الدخول إلى لوحة نوني.</p>
+   <div class="field"><label>البريد الإلكتروني</label><input id="liEmail" class="input" type="email"></div>
+   <div class="field"><label>كلمة المرور</label><input id="liPass" class="input" type="password"></div>
+   <button class="btn" style="width:100%" onclick="login()">دخول</button>
+   <div class="switch">ما عندك حساب؟ <b onclick="showPage('signup')">إنشاء حساب</b></div>
+  </div>
+ </div>
+</section>
+
+<section id="app" class="page">
+ <div class="wrap">
+  <div class="topbar">
+   <div class="brand">Nony <span>Nutrition</span><small>FITNESS • FOOD • WELLNESS</small></div>
+   <div style="display:flex;gap:7px"><button class="iconbtn" onclick="toggleTheme()" title="تغيير الثيم">☼</button><button class="btn secondary small" onclick="logout()">خروج</button></div>
+  </div>
+  <div class="layout">
+   <aside class="sidebar glass">
+    <div class="profile"><div class="profileRow"><div class="avatar" id="avatar">N</div><div><b id="sideName">نوني</b><small>مساحتك الصحية 💜</small></div></div></div>
+    <nav class="nav">
+      <button class="active" data-tab="home" onclick="openTab('home',this)">⌂ الرئيسية</button>
+      <button data-tab="meals" onclick="openTab('meals',this)">🍓 الوجبات</button>
+      <button data-tab="water" onclick="openTab('water',this)">💧 الماء</button>
+      <button data-tab="activity" onclick="openTab('activity',this)">👟 النشاط</button>
+      <button data-tab="progress" onclick="openTab('progress',this)">📊 التقدم</button>
+      <button data-tab="settings" onclick="openTab('settings',this)">⚙ الإعدادات</button>
+    </nav>
+   </aside>
+
+   <main class="main">
+    <section id="tab-home" class="tab">
+     <div class="heroDash glass"><div class="heroCopy">
+       <span class="hello">✨ أهلاً <b id="helloName">نوني</b> • رحلتك مستمرة</span>
+       <h1>كوني أقوى، أهدأ<br>وأفضل كل يوم.</h1>
+       <p>كل وجبة وكل خطوة وكل كوب ماء يقربك من هدفك. احتياجك اليومي محسوب حسب بياناتك ونشاطك.</p>
+       <button class="btn" onclick="openMeal()">＋ أضيفي وجبة</button>
+     </div></div>
+
+     <div class="stats">
+      <div class="stat glass"><div class="statTop"><div class="ico">🔥</div><small>السعرات المتبقية</small></div><b id="calRemain">0</b><small id="calSub">من 0 kcal</small><div class="bar"><i id="calBar"></i></div></div>
+      <div class="stat glass"><div class="statTop"><div class="ico">🌿</div><small>البروتين</small></div><b id="protein">0g</b><small id="proteinSub">من 0g</small><div class="bar"><i id="proteinBar"></i></div></div>
+      <div class="stat glass"><div class="statTop"><div class="ico">💧</div><small>الماء</small></div><b id="water">0.0 L</b><small>من 2.5 L</small><div class="bar"><i id="waterBar"></i></div></div>
+      <div class="stat glass"><div class="statTop"><div class="ico">👟</div><small>الخطوات</small></div><b id="steps">0</b><small>من 10,000</small><div class="bar"><i id="stepsBar"></i></div></div>
+     </div>
+
+     <div class="grid2">
+      <div class="panel glass"><div class="panelHead"><strong>وجبات اليوم 🍽️</strong><button class="btn small" onclick="openMeal()">＋ إضافة</button></div><div id="homeMeals"></div></div>
+      <div class="panel glass"><div class="panelHead"><strong>الماء 💧</strong><span>هدف 2.5 L</span></div>
+       <div class="ring" id="ring"><div class="ringInner"><b id="waterPct">0%</b><small>مكتمل</small></div></div>
+       <div class="waterLine"><span id="waterText">0 / 2500 ml</span><button class="btn small" onclick="addWater(250)">+250 ml</button></div>
+       <div class="cups" id="cups"></div>
+      </div>
+     </div>
+
+     <div class="grid2">
+      <div class="panel glass"><div class="panelHead"><strong>الماكروز اليوم</strong><span>من الوجبات المسجلة</span></div>
+       <div class="quick"><div class="quickBox"><small>بروتين</small><b id="qp">0g</b></div><div class="quickBox"><small>كارب</small><b id="qc">0g</b></div><div class="quickBox"><small>دهون</small><b id="qf">0g</b></div><div class="quickBox"><small>السعرات</small><b id="qk">0</b></div></div>
+      </div>
+      <div class="panel glass"><div class="panelHead"><strong>الخطوات 👟</strong><span>هدف 10K</span></div><div style="font-size:34px;font-weight:800" id="stepsBig">0</div><div style="font-size:8px;color:var(--muted)">خطوة اليوم</div><div class="bar" style="height:8px"><i id="stepsBar2"></i></div><button class="btn secondary small" style="width:100%;margin-top:11px" onclick="setSteps()">تحديث الخطوات</button></div>
+     </div>
+    </section>
+
+    <section id="tab-meals" class="tab hidden"><div class="panel glass"><div class="panelHead"><strong>سجل الوجبات 🍓</strong><button class="btn small" onclick="openMeal()">＋ وجبة جديدة</button></div><div id="allMeals"></div></div></section>
+
+    <section id="tab-water" class="tab hidden"><div class="panel glass"><div class="panelHead"><strong>متابعة الماء 💧</strong><span>هدف يومي 2.5 لتر</span></div>
+      <div class="ring" id="ring2"><div class="ringInner"><b id="waterPct2">0%</b><small>مكتمل</small></div></div>
+      <div class="waterLine"><span id="waterText2">0 / 2500 ml</span><button class="btn small" onclick="addWater(250)">+250 ml</button></div>
+      <div class="cups" id="cups2"></div>
+      <div class="rowBtns" style="margin-top:13px"><button class="btn secondary small" onclick="addWater(500)">+500 ml</button><button class="btn danger small" onclick="addWater(-250)">−250 ml</button></div>
+    </div></section>
+
+    <section id="tab-activity" class="tab hidden"><div class="grid2">
+      <div class="panel glass"><div class="panelHead"><strong>الخطوات 👟</strong><span>هدف 10,000</span></div><div style="font-size:48px;font-weight:800" id="activitySteps">0</div><div style="color:var(--muted);font-size:8px">خطوة اليوم</div><div class="bar" style="height:9px"><i id="activityBar"></i></div><button class="btn" style="width:100%;margin-top:14px" onclick="setSteps()">تحديث الخطوات</button></div>
+      <div class="panel glass"><div class="panelHead"><strong>ملخص هدفك</strong><span id="goalLabel">تثبيت</span></div><div class="quick"><div class="quickBox"><small>BMR</small><b id="bmr">0</b></div><div class="quickBox"><small>TDEE</small><b id="tdee">0</b></div><div class="quickBox"><small>السعرات</small><b id="targetCal">0</b></div><div class="quickBox"><small>البروتين</small><b id="targetPro">0g</b></div></div></div>
+    </div></section>
+
+    <section id="tab-progress" class="tab hidden"><div class="grid2">
+      <div class="panel glass"><div class="panelHead"><strong>تقدم الوزن ⚖️</strong><button class="btn small" onclick="logWeight()">＋ وزن</button></div><div class="chart" id="weightChart"></div></div>
+      <div class="panel glass"><div class="panelHead"><strong>ملخص اليوم</strong><span id="dateText"></span></div><div class="quick"><div class="quickBox"><small>السعرات</small><b id="pqCal">0</b></div><div class="quickBox"><small>البروتين</small><b id="pqPro">0g</b></div><div class="quickBox"><small>الماء</small><b id="pqWater">0 L</b></div><div class="quickBox"><small>الخطوات</small><b id="pqSteps">0</b></div></div></div>
+    </div></section>
+
+    <section id="tab-settings" class="tab hidden"><div class="settingsGrid">
+      <div class="settingCard glass"><b>🎨 المظهر</b><p>بدلي بين الوضع الداكن والفاتح.</p><div class="rowBtns"><button class="btn small" onclick="setTheme('dark')">داكن</button><button class="btn secondary small" onclick="setTheme('light')">فاتح</button></div></div>
+      <div class="settingCard glass"><b>👤 بيانات نوني</b><p id="profileInfo"></p><button class="btn secondary small" onclick="editProfile()">تعديل البيانات</button></div>
+      <div class="settingCard glass"><b>🗑 البيانات المحلية</b><p>هذه النسخة تحفظ البيانات داخل متصفح الجهاز باستخدام LocalStorage.</p><button class="btn danger small" onclick="resetAll()">مسح الحساب والبيانات</button></div>
+      <div class="settingCard glass"><b>ℹ️ دقة الحسبة</b><p>Mifflin-St Jeor للـBMR، ثم معامل النشاط للـTDEE. السعرات والماكروز من البيانات التي تدخلينها للوجبات، لذلك دقة النتيجة تعتمد على دقة الحصة والمنتج.</p></div>
+    </div></section>
+   </main>
+  </div>
+  <nav class="bottomNav glass"><button onclick="openTab('home')">⌂</button><button onclick="openTab('meals')">♡</button><button class="plus" onclick="openMeal()">＋</button><button onclick="openTab('activity')">▥</button><button onclick="openTab('settings')">⚙</button></nav>
+ </div>
+</section>
+
+<div class="modal" id="mealModal"><div class="modalBox glass">
+ <h3>🍓 أضيفي وجبة لنوني</h3>
+ <div class="field"><label>اسم الأكلة</label><input id="mName" class="input" placeholder="مثال: دجاج ورز"></div>
+ <div class="formGrid">
+  <input id="mCal" class="input" type="number" min="0" step="1" placeholder="السعرات kcal">
+  <input id="mPro" class="input" type="number" min="0" step=".1" placeholder="البروتين g">
+  <input id="mCarb" class="input" type="number" min="0" step=".1" placeholder="الكارب g">
+  <input id="mFat" class="input" type="number" min="0" step=".1" placeholder="الدهون g">
+ </div>
+ <div class="field"><label>صورة الوجبة (اختياري)</label><label class="drop" for="mPhoto">📷 اختاري صورة من جهازك</label><input id="mPhoto" type="file" accept="image/*" class="hidden" onchange="previewPhoto(this)"><img id="photoPreview" class="preview hidden"></div>
+ <div class="modalBtns"><button class="btn secondary" onclick="closeMeal()">إلغاء</button><button class="btn" onclick="saveMeal()">حفظ الوجبة</button></div>
+</div></div>
+
+<div class="modal" id="profileModal"><div class="modalBox glass">
+ <h3>تعديل بيانات نوني</h3>
+ <div class="field"><label>الاسم</label><input id="eName" class="input"></div>
+ <div class="field"><label>العمر</label><input id="eAge" class="input" type="number"></div>
+ <div class="field"><label>الوزن kg</label><input id="eWeight" class="input" type="number" step=".1"></div>
+ <div class="field"><label>الطول cm</label><input id="eHeight" class="input" type="number" step=".1"></div>
+ <div class="field"><label>النشاط</label><select id="eActivity" class="select"><option value="1.2">قليل جداً</option><option value="1.375">خفيف</option><option value="1.55">متوسط</option><option value="1.725">عالٍ</option><option value="1.9">عالٍ جداً</option></select></div>
+ <div class="field"><label>الهدف</label><select id="eGoal" class="select"><option value="loss">خسارة الدهون</option><option value="maintain">تثبيت الوزن</option><option value="gain">زيادة العضلات/الوزن</option></select></div>
+ <div class="modalBtns"><button class="btn secondary" onclick="closeProfile()">إلغاء</button><button class="btn" onclick="saveProfile()">حفظ</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='nony_fitness_v5';
+const DEFAULT_MEAL_IMG='https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=600&q=85';
+let state=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||null}catch(e){return null}}
+if(!state)state={user:null,meals:[],water:0,steps:0,weights:[],theme:'dark'};
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function $(id){return document.getElementById(id)}
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');scrollTo({top:0,behavior:'smooth'})}
+function signup(){
+ const name=$('suName').value.trim(),email=$('suEmail').value.trim(),pass=$('suPass').value;
+ const age=Number($('suAge').value),weight=Number($('suWeight').value),height=Number($('suHeight').value);
+ if(!name||!email||!pass||age<13||age>100||weight<=0||height<=0)return toast('كملي البيانات بشكل صحيح أولاً');
+ state={user:{name,email,pass,age,weight,height,activity:Number($('suActivity').value),goal:$('suGoal').value},meals:[],water:0,steps:0,weights:[{date:todayKey(),weight}],theme:'dark'};
+ save();enter();
+}
+function login(){
+ if(!state?.user)return toast('لا يوجد حساب محفوظ على هذا الجهاز');
+ if($('liEmail').value.trim()!==state.user.email||$('liPass').value!==state.user.pass)return toast('البريد أو كلمة المرور غير صحيحة');
+ enter();
+}
+function enter(){
+ showPage('app'); $('helloName').textContent=state.user.name; $('sideName').textContent=state.user.name; $('avatar').textContent=state.user.name[0]||'N'; render(); setTheme(state.theme||'dark');
+}
+function logout(){showPage('landing')}
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function totals(){return state.meals.reduce((a,m)=>({cal:a.cal+(Number(m.cal)||0),p:a.p+(Number(m.p)||0),c:a.c+(Number(m.c)||0),f:a.f+(Number(m.f)||0)}),{cal:0,p:0,c:0,f:0})}
+function calc(){
+ const u=state.user; if(!u)return {bmr:0,tdee:0,target:0,pro:0,fat:0,carb:0};
+ const bmr=10*u.weight+6.25*u.height-5*u.age-161;
+ const tdee=bmr*u.activity;
+ let target=tdee;
+ if(u.goal==='loss')target=tdee*.80;
+ if(u.goal==='gain')target=tdee*1.10;
+ // Protein 1.6 g/kg; fat 0.8 g/kg; carbs are the remaining calories.
+ const pro=u.weight*1.6, fat=u.weight*.8, carb=Math.max(0,(target-pro*4-fat*9)/4);
+ return {bmr,tdee,target,pro,fat,carb};
+}
+function render(){
+ if(!state.user)return;
+ const c=calc(),t=totals(),remain=Math.max(0,c.target-t.cal);
+ const calPct=Math.min(100,t.cal/c.target*100),proPct=Math.min(100,t.p/c.pro*100),waterPct=Math.min(100,state.water/2500*100),stepsPct=Math.min(100,state.steps/10000*100);
+ $('calRemain').textContent=Math.round(remain).toLocaleString();$('calSub').textContent='من '+Math.round(c.target).toLocaleString()+' kcal';$('calBar').style.width=calPct+'%';
+ $('protein').textContent=Math.round(t.p)+'g';$('proteinSub').textContent='من '+Math.round(c.pro)+'g';$('proteinBar').style.width=proPct+'%';
+ $('water').textContent=(state.water/1000).toFixed(1)+' L';$('waterBar').style.width=waterPct+'%';
+ $('steps').textContent=state.steps.toLocaleString();$('stepsBar').style.width=stepsPct+'%';$('stepsBig').textContent=state.steps.toLocaleString();$('stepsBar2').style.width=stepsPct+'%';
+ $('qp').textContent=Math.round(t.p)+'g';$('qc').textContent=Math.round(t.c)+'g';$('qf').textContent=Math.round(t.f)+'g';$('qk').textContent=Math.round(t.cal);
+ setWaterUI('ring','waterPct','waterText','cups');setWaterUI('ring2','waterPct2','waterText2','cups2');
+ $('activitySteps').textContent=state.steps.toLocaleString();$('activityBar').style.width=stepsPct+'%';
+ $('bmr').textContent=Math.round(c.bmr);$('tdee').textContent=Math.round(c.tdee);$('targetCal').textContent=Math.round(c.target);$('targetPro').textContent=Math.round(c.pro)+'g';
+ $('goalLabel').textContent=goalText(state.user.goal);$('dateText').textContent=new Date().toLocaleDateString('ar-SA');
+ $('pqCal').textContent=Math.round(t.cal);$('pqPro').textContent=Math.round(t.p)+'g';$('pqWater').textContent=(state.water/1000).toFixed(1)+' L';$('pqSteps').textContent=state.steps.toLocaleString();
+ $('profileInfo').innerHTML=`${escapeHTML(state.user.name)} • ${state.user.age} سنة • ${state.user.weight} kg • ${state.user.height} cm<br>الهدف: ${goalText(state.user.goal)}`;
+ renderMeals();renderChart();
+}
+function setWaterUI(ringId,pctId,textId,cupsId){
+ const pct=Math.min(100,state.water/2500*100);$(pctId).textContent=Math.round(pct)+'%';$(textId).textContent=state.water+' / 2500 ml';
+ $(ringId).style.background=`conic-gradient(var(--purple) 0 ${pct}%,#ffffff0d ${pct}% 100%)`;
+ $(cupsId).innerHTML=Array.from({length:8},(_,i)=>`<div class="cup ${i<Math.ceil(pct/12.5)?'full':''}"></div>`).join('');
+}
+function renderMeals(){
+ const html=state.meals.length?state.meals.map((m,i)=>mealHTML(m,i)).join(''):'<div class="empty">ما فيه وجبات مسجلة اليوم 🌷<br>أضيفي أول وجبة لنوني.</div>';
+ $('homeMeals').innerHTML=html;$('allMeals').innerHTML=html;
+}
+function mealHTML(m,i){return `<div class="meal"><img src="${m.img||DEFAULT_MEAL_IMG}" alt=""><div class="mealBody"><b>${escapeHTML(m.name)}</b><small>P ${num(m.p)}g • C ${num(m.c)}g • F ${num(m.f)}g</small></div><strong class="mealKcal">${num(m.cal)} kcal</strong><button class="trash" onclick="deleteMeal(${i})">×</button></div>`}
+function num(x){return Number(x||0).toLocaleString('en-US',{maximumFractionDigits:1})}
+function openMeal(){$('mealModal').classList.add('show')}
+function closeMeal(){$('mealModal').classList.remove('show');$('mPhoto').value='';$('photoPreview').classList.add('hidden');$('photoPreview').removeAttribute('src')}
+function saveMeal(){
+ const name=$('mName').value.trim(),cal=Number($('mCal').value),p=Number($('mPro').value)||0,c=Number($('mCarb').value)||0,f=Number($('mFat').value)||0;
+ if(!name||!Number.isFinite(cal)||cal<0)return toast('اكتبي اسم الوجبة والسعرات بشكل صحيح');
+ const img=$('photoPreview').src||'';
+ state.meals.unshift({name,cal,p,c,f,img:img||DEFAULT_MEAL_IMG,date:todayKey()});save();render();closeMeal();['mName','mCal','mPro','mCarb','mFat'].forEach(id=>$(id).value='');toast('تمت إضافة الوجبة ✨');
+}
+function deleteMeal(i){state.meals.splice(i,1);save();render();toast('تم حذف الوجبة')}
+function previewPhoto(input){const file=input.files?.[0];if(!file)return;if(file.size>3*1024*1024)return toast('الصورة كبيرة — اختاري صورة أقل من 3MB');const r=new FileReader();r.onload=()=>{$('photoPreview').src=r.result;$('photoPreview').classList.remove('hidden')};r.readAsDataURL(file)}
+function addWater(n){state.water=Math.max(0,Math.min(2500,state.water+n));save();render();toast(n>=0?'💧 تمت إضافة الماء':'تم تقليل 250 ml')}
+function setSteps(){const n=prompt('اكتبي عدد خطواتك الحالي',state.steps);if(n!==null){const v=parseInt(n,10);if(!Number.isFinite(v)||v<0)return toast('اكتبي رقم خطوات صحيح');state.steps=v;save();render();toast('تم تحديث الخطوات 👟')}}
+function logWeight(){const n=prompt('وزنك الحالي بالكيلو',state.user.weight);if(n===null)return;const v=Number(n);if(!Number.isFinite(v)||v<=0)return toast('وزن غير صحيح');state.user.weight=v;state.weights.push({date:todayKey(),weight:v});save();render();toast('تم تسجيل الوزن ⚖️')}
+function renderChart(){
+ const arr=(state.weights||[]).slice(-7),max=Math.max(...arr.map(x=>x.weight),1),min=Math.min(...arr.map(x=>x.weight),0);
+ $('weightChart').innerHTML=arr.length?arr.map(x=>{const h=Math.max(15,((x.weight-min)/(max-min||1))*70+20);return `<div class="barDay" style="height:${h}%"><span>${x.weight}kg</span></div>`}).join(''):'';
+}
+function openTab(name,btn){
+ document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));$('tab-'+name).classList.remove('hidden');
+ document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');scrollTo({top:0,behavior:'smooth'});
+}
+function goalText(g){return g==='loss'?'خسارة الدهون':g==='gain'?'زيادة العضلات/الوزن':'تثبيت الوزن'}
+function editProfile(){
+ const u=state.user;$('eName').value=u.name;$('eAge').value=u.age;$('eWeight').value=u.weight;$('eHeight').value=u.height;$('eActivity').value=u.activity;$('eGoal').value=u.goal;$('profileModal').classList.add('show')
+}
+function closeProfile(){$('profileModal').classList.remove('show')}
+function saveProfile(){
+ const age=Number($('eAge').value),weight=Number($('eWeight').value),height=Number($('eHeight').value);
+ if(!age||age<13||age>100||weight<=0||height<=0)return toast('تحققي من البيانات');
+ Object.assign(state.user,{name:$('eName').value.trim()||'نوني',age,weight,height,activity:Number($('eActivity').value),goal:$('eGoal').value});save();closeProfile();enter();toast('تم تحديث بيانات نوني 💜')
+}
+function toggleTheme(){setTheme(document.documentElement.dataset.theme==='light'?'dark':'light')}
+function setTheme(t){document.documentElement.dataset.theme=t;state.theme=t;if(state.user)save()}
+function resetAll(){if(confirm('سيتم حذف الحساب والوجبات والبيانات من هذا المتصفح. متأكدة؟')){localStorage.removeItem(KEY);state={user:null,meals:[],water:0,steps:0,weights:[],theme:'dark'};showPage('landing');toast('تم مسح البيانات')}}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function toast(t){const x=$('toast');x.textContent=t;x.classList.add('on');clearTimeout(window.__toast);window.__toast=setTimeout(()=>x.classList.remove('on'),1800)}
+document.addEventListener('DOMContentLoaded',()=>{showPage(state?.user?'app':'landing');if(state?.user)enter();else setTheme('dark')});
+</script>
+</body>
+</html>
