@@ -1,668 +1,1651 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nony Fitness</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0b0712;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-main: #ffffff;
-            --text-sub: #a19bb5;
-            --accent-purple: #a855f7;
-            --accent-pink: #ec4899;
-            --accent-glow: rgba(168, 85, 247, 0.3);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10091c">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-        }
+<title>Nony - Fitness & Nutrition</title>
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: 
-                radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
-            padding: 10px;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
 
-        .app-container {
-            width: 100%;
-            max-width: 410px;
-            background: rgba(15, 10, 25, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 32px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            position: relative;
-            height: 800px;
-            display: flex;
-            flex-direction: column;
-        }
+:root{
+    --bg:#090611;
+    --bg2:#11091c;
+    --card:rgba(31,15,45,.78);
+    --card2:rgba(45,20,65,.62);
+    --purple:#b84cff;
+    --purple2:#7c3cff;
+    --pink:#ed4cff;
+    --border:rgba(218,165,255,.22);
+    --text:#fff;
+    --muted:#a99bb4;
+    --green:#48e0a4;
+    --red:#ff6b81;
+    --orange:#ffb84c;
+}
 
-        .screen {
-            display: none;
-            padding: 20px;
-            flex: 1;
-            overflow-y: auto;
-            padding-bottom: 90px;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        .screen.active {
-            display: block;
-        }
+body{
+    font-family:'Cairo',sans-serif;
+    background:
+        radial-gradient(circle at 80% 0%,rgba(184,76,255,.20),transparent 35%),
+        radial-gradient(circle at 10% 40%,rgba(124,60,255,.12),transparent 35%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
 
-        .glass-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 14px;
-            backdrop-filter: blur(10px);
-        }
+button,input,textarea,select{
+    font-family:inherit;
+}
 
-        /* Start Screen */
-        .start-screen {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
+button{
+    cursor:pointer;
+    border:0;
+}
 
-        .hero-img {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent-purple);
-            box-shadow: 0 0 25px var(--accent-glow);
-            margin-bottom: 15px;
-        }
+.app{
+    width:100%;
+    max-width:520px;
+    min-height:100vh;
+    margin:auto;
+    position:relative;
+    overflow:hidden;
+    padding-bottom:90px;
+}
 
-        .title {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
-        }
+/* =========================
+   START / REGISTER
+========================= */
 
-        .subtitle {
-            font-size: 12px;
-            color: var(--text-sub);
-            margin-bottom: 25px;
-        }
+.start-screen{
+    min-height:100vh;
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:
+        linear-gradient(180deg,rgba(9,6,17,.35),rgba(9,6,17,.98)),
+        radial-gradient(circle at 50% 10%,rgba(184,76,255,.32),transparent 45%);
+}
 
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 14px;
-            border: none;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 10px;
-        }
+.start-image{
+    width:100%;
+    height:390px;
+    object-fit:cover;
+    object-position:center;
+    border-radius:30px;
+    border:1px solid var(--border);
+    box-shadow:0 25px 80px rgba(184,76,255,.18);
+    margin-bottom:25px;
+}
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            color: white;
-            box-shadow: 0 5px 15px var(--accent-glow);
-        }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:8px;
+}
 
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
+.logo-icon{
+    width:50px;
+    height:50px;
+    border-radius:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,var(--purple),var(--pink));
+    font-size:26px;
+    font-weight:900;
+}
 
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--card-border);
-            color: white;
-        }
+.logo h1{
+    font-size:28px;
+    font-weight:900;
+}
 
-        /* Dashboard */
-        .dash-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
+.subtitle{
+    color:var(--muted);
+    margin-bottom:25px;
+}
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.primary-btn{
+    width:100%;
+    padding:17px 20px;
+    border-radius:18px;
+    color:#fff;
+    font-size:16px;
+    font-weight:800;
+    background:linear-gradient(135deg,var(--purple),var(--pink));
+    box-shadow:0 12px 30px rgba(184,76,255,.25);
+    transition:.2s;
+}
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-purple);
-        }
+.primary-btn:active{
+    transform:scale(.98);
+}
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
+.secondary-btn{
+    width:100%;
+    padding:16px;
+    margin-top:10px;
+    border-radius:18px;
+    color:#fff;
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--border);
+    font-weight:700;
+}
 
-        .stat-value {
-            font-size: 17px;
-            font-weight: 700;
-            color: #fff;
-            margin-top: 4px;
-        }
+/* =========================
+   HEADER
+========================= */
 
-        /* Workouts Screen Styling */
-        .workout-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 14px;
-            margin-bottom: 14px;
-        }
+.header{
+    padding:24px 20px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--border);
+    background:rgba(9,6,17,.75);
+    backdrop-filter:blur(20px);
+    position:sticky;
+    top:0;
+    z-index:20;
+}
 
-        .workout-header {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-        .workout-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 1px solid var(--accent-purple);
-            flex-shrink: 0;
-            background: #000;
-        }
+.avatar{
+    width:48px;
+    height:48px;
+    border-radius:16px;
+    object-fit:cover;
+    border:1px solid var(--border);
+}
 
-        .workout-inputs {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
+.header h2{
+    font-size:20px;
+}
 
-        .input-track {
-            flex: 1;
-        }
+.header p{
+    color:var(--muted);
+    font-size:12px;
+}
 
-        .input-track label {
-            font-size: 11px;
-            color: var(--text-sub);
-            display: block;
-            margin-bottom: 3px;
-        }
+.header-actions{
+    display:flex;
+    gap:8px;
+}
 
-        .input-track input {
-            width: 100%;
-            padding: 8px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            color: white;
-            font-size: 13px;
-            text-align: center;
-        }
+.icon-btn{
+    width:44px;
+    height:44px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    color:white;
+    border:1px solid var(--border);
+    font-size:20px;
+}
 
-        .save-btn {
-            background: rgba(168, 85, 247, 0.2);
-            border: 1px solid var(--accent-purple);
-            color: #d8b4fe;
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 8px;
-            width: 100%;
-            transition: 0.2s;
-        }
+/* =========================
+   CONTENT
+========================= */
 
-        .save-btn:hover {
-            background: var(--accent-purple);
-            color: white;
-        }
+.content{
+    padding:20px;
+}
 
-        /* Inputs & Calculator */
-        .input-group {
-            margin-bottom: 10px;
-            text-align: right;
-        }
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
 
-        .input-group label {
-            display: block;
-            font-size: 12px;
-            color: var(--text-sub);
-            margin-bottom: 3px;
-        }
+.section-title h2{
+    font-size:19px;
+}
 
-        .input-control, select {
-            width: 100%;
-            padding: 9px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            color: white;
-            font-size: 13px;
-            outline: none;
-        }
+.section-title span{
+    color:var(--purple);
+    font-size:13px;
+}
 
-        select option { background: #120c1c; }
+.hero-card{
+    padding:24px;
+    border-radius:28px;
+    background:
+        radial-gradient(circle at 20% 10%,rgba(237,76,255,.18),transparent 40%),
+        linear-gradient(145deg,rgba(45,20,65,.9),rgba(15,8,25,.95));
+    border:1px solid var(--border);
+    margin-bottom:20px;
+}
 
-        .result-box {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15));
-            border: 1px solid var(--accent-purple);
-            border-radius: 16px;
-            padding: 14px;
-            margin-top: 14px;
-            display: none;
-        }
+.hero-label{
+    color:#c779ff;
+    font-size:13px;
+    margin-bottom:5px;
+}
 
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 13px;
-        }
+.hero-card h1{
+    font-size:31px;
+    line-height:1.4;
+    margin-bottom:8px;
+}
 
-        .result-row:last-child { border-bottom: none; }
+.hero-card p{
+    color:var(--muted);
+    margin-bottom:20px;
+}
 
-        /* Bottom Nav */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background: rgba(10, 6, 18, 0.95);
-            border-top: 1px solid var(--card-border);
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            left: 0;
-        }
+/* =========================
+   CALORIES
+========================= */
 
-        .nav-item {
-            color: var(--text-sub);
-            font-size: 11px;
-            cursor: pointer;
-            text-align: center;
-            transition: 0.3s;
-        }
+.calorie-card{
+    padding:20px;
+    border-radius:24px;
+    background:var(--card);
+    border:1px solid var(--border);
+    margin-bottom:20px;
+}
 
-        .nav-item.active {
-            color: var(--accent-purple);
-            font-weight: 700;
-        }
-    </style>
+.calorie-number{
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    margin:8px 0 15px;
+}
+
+.calorie-number strong{
+    font-size:42px;
+    color:#d06aff;
+}
+
+.calorie-number span{
+    color:var(--muted);
+    margin-bottom:9px;
+}
+
+.progress{
+    width:100%;
+    height:9px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--purple2),var(--pink));
+    border-radius:20px;
+    transition:.4s;
+}
+
+/* =========================
+   MACROS
+========================= */
+
+.macros{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:22px;
+}
+
+.macro{
+    padding:17px 10px;
+    border-radius:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    text-align:center;
+}
+
+.macro-icon{
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+.macro strong{
+    display:block;
+    font-size:18px;
+}
+
+.macro span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* =========================
+   MEALS
+========================= */
+
+.meal-card{
+    padding:18px;
+    border-radius:22px;
+    background:var(--card);
+    border:1px solid var(--border);
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.meal-icon{
+    width:55px;
+    height:55px;
+    border-radius:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(184,76,255,.13);
+    font-size:27px;
+    flex-shrink:0;
+}
+
+.meal-details{
+    flex:1;
+}
+
+.meal-details h3{
+    font-size:15px;
+    margin-bottom:3px;
+}
+
+.meal-details p{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.meal-stats{
+    margin-top:7px;
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.meal-stats span{
+    font-size:10px;
+    color:#d7c9df;
+}
+
+.delete-btn{
+    color:var(--red);
+    background:none;
+    font-size:18px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    text-align:center;
+    padding:35px 20px;
+    border:1px dashed var(--border);
+    border-radius:22px;
+    color:var(--muted);
+}
+
+.empty .big{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+/* =========================
+   WORKOUTS
+========================= */
+
+.workout-card{
+    border-radius:23px;
+    background:var(--card);
+    border:1px solid var(--border);
+    margin-bottom:13px;
+    overflow:hidden;
+}
+
+.workout-head{
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.workout-head h3{
+    font-size:16px;
+}
+
+.workout-head p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:2px;
+}
+
+.workout-day{
+    color:#d174ff;
+    font-size:12px;
+}
+
+.exercise{
+    padding:15px 18px;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.exercise-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.exercise-name{
+    font-weight:700;
+    font-size:14px;
+}
+
+.exercise-info{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.exercise-technique{
+    margin-top:9px;
+    color:#b9aabd;
+    font-size:11px;
+    line-height:1.8;
+}
+
+.weight-row{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.weight-row input{
+    width:100%;
+    padding:10px;
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--border);
+    color:#fff;
+    border-radius:11px;
+    outline:none;
+    text-align:center;
+}
+
+.save-weight{
+    padding:0 13px;
+    border-radius:11px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--purple2),var(--purple));
+    font-size:11px;
+    font-weight:700;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(520px,100%);
+    padding:10px 15px calc(10px + env(safe-area-inset-bottom));
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+    background:rgba(11,6,18,.92);
+    backdrop-filter:blur(25px);
+    border-top:1px solid var(--border);
+    z-index:50;
+}
+
+.nav-btn{
+    background:none;
+    color:var(--muted);
+    padding:8px 3px;
+    border-radius:14px;
+    font-size:10px;
+}
+
+.nav-btn .nav-icon{
+    display:block;
+    font-size:21px;
+    margin-bottom:2px;
+}
+
+.nav-btn.active{
+    color:#d06aff;
+    background:rgba(184,76,255,.10);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(10px);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(520px,100%);
+    max-height:92vh;
+    overflow-y:auto;
+    background:
+        radial-gradient(circle at 80% 0%,rgba(184,76,255,.18),transparent 35%),
+        #130b1d;
+    border:1px solid var(--border);
+    border-radius:30px 30px 0 0;
+    padding:22px 20px 30px;
+    animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+    from{transform:translateY(100%);}
+    to{transform:translateY(0);}
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-head h2{
+    font-size:21px;
+}
+
+.close{
+    width:40px;
+    height:40px;
+    border-radius:13px;
+    background:rgba(255,255,255,.07);
+    color:white;
+    font-size:21px;
+}
+
+.field{
+    margin-bottom:15px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:7px;
+    font-size:12px;
+    color:#d6c9dc;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    padding:14px;
+    border-radius:15px;
+    border:1px solid var(--border);
+    outline:none;
+    background:rgba(255,255,255,.06);
+    color:white;
+    font-size:14px;
+}
+
+.field textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.field select option{
+    background:#180d22;
+}
+
+.helper{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.8;
+    margin-top:7px;
+}
+
+.analyze-result{
+    display:none;
+    margin-top:18px;
+}
+
+.analyze-result.show{
+    display:block;
+}
+
+.result-card{
+    padding:18px;
+    border-radius:20px;
+    background:rgba(184,76,255,.08);
+    border:1px solid var(--border);
+}
+
+.result-card h3{
+    margin-bottom:12px;
+}
+
+.result-total{
+    font-size:30px;
+    color:#d16aff;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.result-macros{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.result-macros div{
+    padding:10px;
+    border-radius:13px;
+    background:rgba(255,255,255,.05);
+    text-align:center;
+}
+
+.result-macros strong{
+    display:block;
+}
+
+.result-macros span{
+    font-size:9px;
+    color:var(--muted);
+}
+
+/* =========================
+   REGISTER
+========================= */
+
+.register-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.profile-summary{
+    padding:18px;
+    border-radius:22px;
+    background:var(--card);
+    border:1px solid var(--border);
+    margin-bottom:18px;
+}
+
+.profile-row{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    font-size:13px;
+}
+
+.profile-row:last-child{
+    border:0;
+}
+
+.profile-row span{
+    color:var(--muted);
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:95px;
+    transform:translateX(-50%) translateY(20px);
+    width:calc(100% - 40px);
+    max-width:480px;
+    padding:14px 17px;
+    border-radius:16px;
+    background:#24142e;
+    border:1px solid var(--border);
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:200;
+    font-size:12px;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+    display:none!important;
+}
+
+.tab{
+    display:none;
+}
+
+.tab.active{
+    display:block;
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:700px){
+    body{
+        padding:20px;
+    }
+
+    .app{
+        border:1px solid var(--border);
+        border-radius:35px;
+        min-height:calc(100vh - 40px);
+    }
+
+    .bottom-nav{
+        bottom:20px;
+        border-radius:22px;
+        width:520px;
+        border:1px solid var(--border);
+    }
+}
+</style>
 </head>
+
 <body>
 
-<div class="app-container">
+<div class="app">
 
-    <!-- 1. شاشة البداية -->
-    <div id="startScreen" class="screen active start-screen">
-        <img src="nony.jpg.png" alt="Nony" class="hero-img">
-        <h1 class="title">نوني - Nony</h1>
-        <p class="subtitle">تطبيقك الرياضي الشخصي المتكامل</p>
-        
-        <button class="btn btn-primary" onclick="showScreen('dashboardScreen')">الدخول للتطبيق</button>
-        <button class="btn btn-outline" onclick="showScreen('workoutScreen')">جدول تمارين البنات 🏋️‍♀️</button>
-        <button class="btn btn-outline" onclick="showScreen('calcScreen')">حاسبة السعرات الدقيقة 🧮</button>
-    </div>
+<!-- =========================
+     START SCREEN
+========================= -->
 
-    <!-- 2. لوحة التحكم (الرئيسية) -->
-    <div id="dashboardScreen" class="screen">
-        <div class="dash-header">
-            <div class="user-info">
-                <img src="nony.jpg.png" alt="Nony" class="user-avatar">
-                <div>
-                    <h3 style="font-size: 15px;">أهلاً بك، نوني 👋</h3>
-                    <p style="font-size: 11px; color: var(--text-sub);">استمرّي بقوة نحو أهدافك</p>
-                </div>
-            </div>
-            <span style="font-size: 18px;">🔥</span>
-        </div>
+<section id="startScreen" class="start-screen">
 
-        <div class="stats-grid">
-            <div class="glass-card" style="margin-bottom:0;">
-                <span style="font-size: 11px; color: var(--text-sub);">الخطوات اليومية</span>
-                <div class="stat-value">8,420</div>
-                <small style="color: #4ade80; font-size: 10px;">نشاط ممتاز</small>
-            </div>
-            <div class="glass-card" style="margin-bottom:0;">
-                <span style="font-size: 11px; color: var(--text-sub);">الماء المستهلك</span>
-                <div class="stat-value">2.1 لتر</div>
-                <small style="color: #38bdf8; font-size: 10px;">قريب من الهدف</small>
-            </div>
-        </div>
+    <img
+        src="nony.jpg.png"
+        alt="Nony"
+        class="start-image"
+    >
 
-        <div class="glass-card" style="margin-top: 14px; cursor: pointer;" onclick="showScreen('workoutScreen')">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <h4 style="font-size: 14px; margin-bottom: 4px;">🏋️‍♀️ جدول تمارين البنات المخصص</h4>
-                    <p style="font-size: 12px; color: var(--text-sub);">اضغطي هنا لعرض التمارين وتسجيل الأوزان</p>
-                </div>
-                <span style="font-size: 18px; color: var(--accent-purple);">➔</span>
-            </div>
-        </div>
-
-        <div class="glass-card" style="cursor: pointer;" onclick="showScreen('calcScreen')">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <h4 style="font-size: 14px; margin-bottom: 4px;">🧮 حاسبة السعرات والماكروز</h4>
-                    <p style="font-size: 12px; color: var(--text-sub);">احسبي سعراتك بدقة وتوزيعه الغذائي</p>
-                </div>
-                <span style="font-size: 18px; color: var(--accent-purple);">➔</span>
-            </div>
+    <div class="logo">
+        <div class="logo-icon">N</div>
+        <div>
+            <h1>Nony</h1>
+            <p class="subtitle">Fitness & Nutrition</p>
         </div>
     </div>
 
-    <!-- 3. شاشة جدول تمارين البنات (مع مقاطع فيديو متحركة GIF وشرح وحفظ الأوزان) -->
-    <div id="workoutScreen" class="screen">
-        <h3 class="title" style="font-size: 18px; text-align: center; margin-bottom: 4px;">جدول تمارين البنات لشد الجسم</h3>
-        <p class="subtitle" style="text-align: center; margin-bottom: 16px;">شاهدي مقطع الحركة الصحيحة وسجّلي أوزانك وتكراراتك</p>
+    <button class="primary-btn" onclick="openRegister()">
+        إنشاء حساب
+    </button>
 
-        <!-- تمرين 1 -->
-        <div class="workout-card">
-            <div class="workout-header">
-                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=300&q=80" alt="Squat GIF" class="workout-img">
-                <div>
-                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">1. سكوات بالأوزان (Barbell Squat)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> الأرجل والمؤخرة. انزلي ببطء واجعلي ركبتيك باتجاه أطراف القدمين.</p>
-                </div>
-            </div>
-            <div class="workout-inputs">
-                <div class="input-track">
-                    <label>الوزن (كجم)</label>
-                    <input type="number" id="w_weight_1" placeholder="مثال: 20">
-                </div>
-                <div class="input-track">
-                    <label>التكرارات</label>
-                    <input type="number" id="w_reps_1" placeholder="مثال: 12">
-                </div>
-            </div>
-            <button class="save-btn" onclick="saveWorkout(1)">حفظ الأوزان والتكرارات 💾</button>
+    <button class="secondary-btn" onclick="skipRegister()">
+        الدخول كزائر
+    </button>
+
+</section>
+
+
+<!-- =========================
+     REGISTER MODAL
+========================= -->
+
+<div id="registerModal" class="modal">
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <h2>إنشاء حسابك 👋</h2>
+            <button class="close" onclick="closeModal('registerModal')">×</button>
         </div>
 
-        <!-- تمرين 2 -->
-        <div class="workout-card">
-            <div class="workout-header">
-                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=300&q=80" alt="Hip Thrust GIF" class="workout-img">
-                <div>
-                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">2. هيب ثرست (Hip Thrust)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> عضلات المؤخرة والأرداف. اعصري المؤخرة بقوة في الأعلى.</p>
-                </div>
-            </div>
-            <div class="workout-inputs">
-                <div class="input-track">
-                    <label>الوزن (كجم)</label>
-                    <input type="number" id="w_weight_2" placeholder="مثال: 30">
-                </div>
-                <div class="input-track">
-                    <label>التكرارات</label>
-                    <input type="number" id="w_reps_2" placeholder="مثال: 12">
-                </div>
-            </div>
-            <button class="save-btn" onclick="saveWorkout(2)">حفظ الأوزان والتكرارات 💾</button>
+        <div class="field">
+            <label>اسمك</label>
+            <input id="userName" type="text" placeholder="مثال: تركي">
         </div>
 
-        <!-- تمرين 3 -->
-        <div class="workout-card">
-            <div class="workout-header">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=300&q=80" alt="RDL GIF" class="workout-img">
-                <div>
-                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">3. رومانيان ديدليفت (RDL)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> الأرجل الخلفية وأسفل الظهر. حافظي على استقامة ظهرك.</p>
-                </div>
-            </div>
-            <div class="workout-inputs">
-                <div class="input-track">
-                    <label>الوزن (كجم)</label>
-                    <input type="number" id="w_weight_3" placeholder="مثال: 25">
-                </div>
-                <div class="input-track">
-                    <label>التكرارات</label>
-                    <input type="number" id="w_reps_3" placeholder="مثال: 10">
-                </div>
-            </div>
-            <button class="save-btn" onclick="saveWorkout(3)">حفظ الأوزان والتكرارات 💾</button>
-        </div>
+        <div class="register-grid">
 
-        <!-- تمرين 4 -->
-        <div class="workout-card">
-            <div class="workout-header">
-                <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=300&q=80" alt="Lat Pulldown GIF" class="workout-img">
-                <div>
-                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">4. سحب ظهر علوي (Lat Pulldown)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> عضلات الظهر العلوية لخصر منحوت وقوام مشدود.</p>
-                </div>
+            <div class="field">
+                <label>العمر</label>
+                <input id="userAge" type="number" placeholder="22">
             </div>
-            <div class="workout-inputs">
-                <div class="input-track">
-                    <label>الوزن (كجم)</label>
-                    <input type="number" id="w_weight_4" placeholder="مثال: 15">
-                </div>
-                <div class="input-track">
-                    <label>التكرارات</label>
-                    <input type="number" id="w_reps_4" placeholder="مثال: 12">
-                </div>
-            </div>
-            <button class="save-btn" onclick="saveWorkout(4)">حفظ الأوزان والتكرارات 💾</button>
-        </div>
-    </div>
 
-    <!-- 4. حاسبة السعرات والماكروز -->
-    <div id="calcScreen" class="screen">
-        <h3 class="title" style="font-size: 18px; text-align: center; margin-bottom: 14px;">حاسبة التغذية واللياقة</h3>
-
-        <div class="glass-card">
-            <div class="input-group">
-                <label>النوع / البروفايل:</label>
-                <select id="gender">
-                    <option value="female">أنثى</option>
+            <div class="field">
+                <label>الجنس</label>
+                <select id="userGender">
                     <option value="male">ذكر</option>
+                    <option value="female">أنثى</option>
                 </select>
             </div>
 
-            <div style="display: flex; gap: 8px;">
-                <div class="input-group" style="flex: 1;">
-                    <label>الوزن (كجم):</label>
-                    <input type="number" id="weight" class="input-control" placeholder="60">
-                </div>
-                <div class="input-group" style="flex: 1;">
-                    <label>الطول (سم):</label>
-                    <input type="number" id="height" class="input-control" placeholder="165">
-                </div>
+            <div class="field">
+                <label>الوزن (كجم)</label>
+                <input id="userWeight" type="number" step="0.1" placeholder="55">
             </div>
 
-            <div style="display: flex; gap: 8px;">
-                <div class="input-group" style="flex: 1;">
-                    <label>العمر:</label>
-                    <input type="number" id="age" class="input-control" placeholder="23">
-                </div>
-                <div class="input-group" style="flex: 1;">
-                    <label>الهدف:</label>
-                    <select id="goal">
-                        <option value="lose">إنقاص الوزن</option>
-                        <option value="maintain">المحافظة</option>
-                        <option value="gain">زيادة عضلات</option>
-                    </select>
-                </div>
+            <div class="field">
+                <label>الطول (سم)</label>
+                <input id="userHeight" type="number" placeholder="167">
             </div>
 
-            <div class="input-group">
-                <label>مستوى النشاط البدني:</label>
-                <select id="activity">
-                    <option value="1.2">خامل (بدون تمارين)</option>
-                    <option value="1.375">خفيف (1-3 أيام أسبوعياً)</option>
-                    <option value="1.55">متوسط (3-5 أيام أسبوعياً)</option>
-                    <option value="1.725">عالي (6-7 أيام أسبوعياً)</option>
-                </select>
-            </div>
-
-            <button class="btn btn-primary" onclick="calculateFitness()" style="margin-top: 6px;">احسب السعرات والماكروز</button>
         </div>
 
-        <div id="resultBox" class="result-box">
-            <h4 style="text-align: center; color: var(--accent-purple); margin-bottom: 10px;">نتائجك الصحية الدقيقة 📊</h4>
-            <div class="result-row">
-                <span>مؤشر كتلة الجسم (BMI):</span>
-                <strong id="resBMI">-</strong>
-            </div>
-            <div class="result-row">
-                <span>معدل الأيض الأساسي (BMR):</span>
-                <strong id="resBMR">- سعرة</strong>
-            </div>
-            <div class="result-row">
-                <span>السعرات المستهدفة:</span>
-                <strong id="resTDEE" style="color: #4ade80;">- سعرة</strong>
-            </div>
-            <div class="result-row">
-                <span>البروتين اليومي:</span>
-                <strong id="resProtein">- جرام</strong>
-            </div>
-            <div class="result-row">
-                <span>الكاربوهيدرات:</span>
-                <strong id="resCarbs">- جرام</strong>
-            </div>
-            <div class="result-row">
-                <span>الدهون الصحية:</span>
-                <strong id="resFats">- جرام</strong>
-            </div>
-            <div class="result-row">
-                <span>احتياج الماء:</span>
-                <strong id="resWater" style="color: #38bdf8;">- لتر</strong>
-            </div>
+        <div class="field">
+            <label>هدفك</label>
+            <select id="userGoal">
+                <option value="gain">زيادة العضلات / تضخيم</option>
+                <option value="maintain">المحافظة على الوزن</option>
+                <option value="loss">خسارة الدهون</option>
+            </select>
         </div>
+
+        <div class="field">
+            <label>نشاطك اليومي</label>
+            <select id="activity">
+                <option value="1.2">قليل الحركة</option>
+                <option value="1.375">نشاط خفيف</option>
+                <option value="1.55" selected>نشاط متوسط</option>
+                <option value="1.725">نشاط مرتفع</option>
+                <option value="1.9">نشاط مرتفع جدًا</option>
+            </select>
+        </div>
+
+        <button class="primary-btn" onclick="createProfile()">
+            ابدأ الآن 🚀
+        </button>
+
     </div>
+</div>
 
-    <!-- شريط التنقل السفلي -->
-    <div class="bottom-nav">
-        <div class="nav-item" onclick="showScreen('startScreen')">
-            <div>🏠</div>
-            <div>البداية</div>
+
+<!-- =========================
+     MAIN APP
+========================= -->
+
+<section id="mainApp" class="hidden">
+
+    <header class="header">
+
+        <div class="user-info">
+            <img
+                src="nony.jpg.png"
+                class="avatar"
+                alt="Nony"
+            >
+
+            <div>
+                <h2 id="welcomeName">أهلًا 👋</h2>
+                <p>Nony Fitness & Nutrition</p>
+            </div>
         </div>
-        <div class="nav-item" onclick="showScreen('dashboardScreen')">
-            <div>📊</div>
-            <div>الرئيسية</div>
+
+        <div class="header-actions">
+            <button class="icon-btn" onclick="openProfile()">⚙️</button>
         </div>
-        <div class="nav-item active" onclick="showScreen('workoutScreen')">
-            <div>🏋️‍♀️</div>
-            <div>التمارين</div>
+
+    </header>
+
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
+    <main id="homeTab" class="tab active">
+
+        <div class="content">
+
+            <div class="hero-card">
+
+                <div class="hero-label">
+                    Nutrition 🍽️
+                </div>
+
+                <h1>وجباتي</h1>
+
+                <p>
+                    اكتب لي وش أكلت، والتطبيق يحسب لك السعرات
+                    والبروتين والكارب والدهون تلقائيًا.
+                </p>
+
+                <button class="primary-btn" onclick="openMealModal()">
+                    + إضافة وجبة
+                </button>
+
+            </div>
+
+
+            <div class="calorie-card">
+
+                <div class="section-title">
+                    <h2>سعرات اليوم</h2>
+                    <span id="calorieGoalText">0 kcal</span>
+                </div>
+
+                <div class="calorie-number">
+                    <strong id="todayCalories">0</strong>
+                    <span>kcal</span>
+                </div>
+
+                <div class="progress">
+                    <div id="calorieProgress" class="progress-fill"></div>
+                </div>
+
+            </div>
+
+
+            <div class="macros">
+
+                <div class="macro">
+                    <div class="macro-icon">🥩</div>
+                    <strong id="todayProtein">0g</strong>
+                    <span>بروتين</span>
+                </div>
+
+                <div class="macro">
+                    <div class="macro-icon">🍚</div>
+                    <strong id="todayCarbs">0g</strong>
+                    <span>كارب</span>
+                </div>
+
+                <div class="macro">
+                    <div class="macro-icon">🥑</div>
+                    <strong id="todayFat">0g</strong>
+                    <span>دهون</span>
+                </div>
+
+            </div>
+
+
+            <div class="section-title">
+                <h2>وجبات اليوم</h2>
+                <span id="mealCount">0 وجبة</span>
+            </div>
+
+            <div id="mealList"></div>
+
         </div>
-        <div class="nav-item" onclick="showScreen('calcScreen')">
-            <div>🧮</div>
-            <div>الحاسبة</div>
+
+    </main>
+
+
+    <!-- =========================
+         WORKOUT TAB
+    ========================= -->
+
+    <main id="workoutTab" class="tab">
+
+        <div class="content">
+
+            <div class="hero-card">
+
+                <div class="hero-label">
+                    Training 🏋️
+                </div>
+
+                <h1>جدول التمارين</h1>
+
+                <p>
+                    برنامج واضح مع المجموعات والتكرارات والتكنيك،
+                    واحفظ وزنك لكل تمرين.
+                </p>
+
+            </div>
+
+            <div id="workoutList"></div>
+
         </div>
+
+    </main>
+
+
+    <!-- =========================
+         PROFILE TAB
+    ========================= -->
+
+    <main id="profileTab" class="tab">
+
+        <div class="content">
+
+            <div class="section-title">
+                <h2>ملفي</h2>
+            </div>
+
+            <div class="profile-summary">
+
+                <div class="profile-row">
+                    <span>الاسم</span>
+                    <strong id="profileName">-</strong>
+                </div>
+
+                <div class="profile-row">
+                    <span>العمر</span>
+                    <strong id="profileAge">-</strong>
+                </div>
+
+                <div class="profile-row">
+                    <span>الوزن</span>
+                    <strong id="profileWeight">-</strong>
+                </div>
+
+                <div class="profile-row">
+                    <span>الطول</span>
+                    <strong id="profileHeight">-</strong>
+                </div>
+
+                <div class="profile-row">
+                    <span>الهدف</span>
+                    <strong id="profileGoal">-</strong>
+                </div>
+
+                <div class="profile-row">
+                    <span>احتياجك اليومي</span>
+                    <strong id="profileCalories">-</strong>
+                </div>
+
+            </div>
+
+            <button class="primary-btn" onclick="openRegister(true)">
+                تعديل البيانات
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="resetApp()"
+            >
+                حذف بيانات التطبيق
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         BOTTOM NAV
+    ========================= -->
+
+    <nav class="bottom-nav">
+
+        <button
+            class="nav-btn active"
+            onclick="switchTab('home',this)"
+        >
+            <span class="nav-icon">🏠</span>
+            الرئيسية
+        </button>
+
+        <button
+            class="nav-btn"
+            onclick="switchTab('workout',this)"
+        >
+            <span class="nav-icon">🏋️</span>
+            التمارين
+        </button>
+
+        <button
+            class="nav-btn"
+            onclick="openMealModal()"
+        >
+            <span class="nav-icon">➕</span>
+            وجبة
+        </button>
+
+        <button
+            class="nav-btn"
+            onclick="switchTab('profile',this)"
+        >
+            <span class="nav-icon">👤</span>
+            حسابي
+        </button>
+
+    </nav>
+
+</section>
+
+
+<!-- =========================
+     ADD MEAL MODAL
+========================= -->
+
+<div id="mealModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <div>
+                <h2>إضافة وجبة 🍽️</h2>
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal('mealModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                اكتب وش أكلت
+            </label>
+
+            <textarea
+                id="mealText"
+                placeholder="مثال:
+صدر دجاج 200 جرام + رز أبيض 300 جرام
+
+أو:
+3 بيض + خبز توست 2 شريحة + موزة"
+            ></textarea>
+
+            <div class="helper">
+                اكتب اسم الأكل والكمية بالجرام أو العدد.
+                التطبيق يتعرف على الأطعمة الموجودة في قاعدة البيانات
+                ويحسب القيم الغذائية تلقائيًا.
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="analyzeMeal()"
+        >
+            احسب الوجبة 🔍
+        </button>
+
+
+        <div id="analyzeResult" class="analyze-result">
+
+            <div class="result-card">
+
+                <h3 id="resultMealName">
+                    الوجبة
+                </h3>
+
+                <div class="result-total">
+                    <span id="resultCalories">0</span>
+                    kcal
+                </div>
+
+                <div class="result-macros">
+
+                    <div>
+                        <strong id="resultProtein">0g</strong>
+                        <span>بروتين</span>
+                    </div>
+
+                    <div>
+                        <strong id="resultCarbs">0g</strong>
+                        <span>كارب</span>
+                    </div>
+
+                    <div>
+                        <strong id="resultFat">0g</strong>
+                        <span>دهون</span>
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button
+                    class="primary-btn"
+                    onclick="saveAnalyzedMeal()"
+                >
+                    إضافة الوجبة للقائمة ✅
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
 
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div id="toast" class="toast"></div>
+
+</div>
+
+
 <script>
-    // التنقل بين الشاشات
-    function showScreen(screenId) {
-        document.querySelectorAll('.screen').forEach(screen => {
-            screen.classList.remove('active');
-        });
-        document.getElementById(screenId).classList.add('active');
 
-        // تحديث تفعيل أيقونات النافذة السفلية
-        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-        if(screenId === 'startScreen') document.querySelectorAll('.nav-item')[0].classList.add('active');
-        if(screenId === 'dashboardScreen') document.querySelectorAll('.nav-item')[1].classList.add('active');
-        if(screenId === 'workoutScreen') document.querySelectorAll('.nav-item')[2].classList.add('active');
-        if(screenId === 'calcScreen') document.querySelectorAll('.nav-item')[3].classList.add('active');
+/* =====================================================
+   DATABASE
+   قيم تقريبية لكل 100 جرام
+===================================================== */
+
+const foods = {
+    "صدر دجاج":{ calories:165, protein:31, carbs:0, fat:3.6 },
+    "دجاج":{ calories:165, protein:31, carbs:0, fat:3.6 },
+    "دجاج مشوي":{ calories:165, protein:31, carbs:0, fat:3.6 },
+    "صدر دجاج مشوي":{ calories:165, protein:31, carbs:0, fat:3.6 },
+    "رز":{ calories:130, protein:2.7, carbs:28, fat:.3 },
+    "رز أبيض":{ calories:130, protein:2.7, carbs:28, fat:.3 },
+    "أرز":{ calories:130, protein:2.7, carbs:28, fat:.3 },
+    "أرز أبيض":{ calories:130, protein:2.7, carbs:28, fat:.3 },
+    "لحم":{ calories:250, protein:26, carbs:0, fat:17 },
+    "لحم مفروم":{ calories:250, protein:26, carbs:0, fat:17 },
+    "بيض":{ calories:143, protein:12.6, carbs:0.7, fat:9.5 },
+    "بيضة":{ calories:72, protein:6.3, carbs:.4, fat:4.8, unit:true },
+    "بيضتين":{ calories:144, protein:12.6, carbs:.8, fat:9.6, unit:true },
+    "تونة":{ calories:132, protein:28, carbs:0, fat:1 },
+    "سلمون":{ calories:208, protein:20, carbs:0, fat:13 },
+    "بطاطس":{ calories:77, protein:2, carbs:17, fat:.1 },
+    "بطاطا":{ calories:77, protein:2, carbs:17, fat:.1 },
+    "بطاطس مقلية":{ calories:312, protein:3.4, carbs:41, fat:15 },
+    "خبز":{ calories:265, protein:9, carbs:49, fat:3.2 },
+    "خبز عربي":{ calories:275, protein:9, carbs:55, fat:1.2 },
+    "توست":{ calories:265, protein:9, carbs:49, fat:3.2 },
+    "شوفان":{ calories:389, protein:16.9, carbs:66.3, fat:6.9 },
+    "موز":{ calories:89, protein:1.1, carbs:22.8, fat:.3 },
+    "موزة":{ calories:105, protein:1.3, carbs:27, fat:.4, unit:true },
+    "تفاح":{ calories:52, protein:.3, carbs:14, fat:.2 },
+    "فراولة":{ calories:32, protein:.7, carbs:7.7, fat:.3 },
+    "حليب":{ calories:61, protein:3.2, carbs:4.8, fat:3.3 },
+    "حليب كامل الدسم":{ calories:61, protein:3.2, carbs:4.8, fat:3.3 },
+    "زبادي":{ calories:61, protein:3.5, carbs:4.7, fat:3.3 },
+    "لبن":{ calories:61, protein:3.3, carbs:4.8, fat:3.3 },
+    "فول":{ calories:110, protein:7.6, carbs:19.7, fat:.4 },
+    "حمص":{ calories:166, protein:8.9, carbs:27.4, fat:2.6 },
+    "عدس":{ calories:116, protein:9, carbs:20, fat:.4 },
+    "فلافل":{ calories:333, protein:13, carbs:32, fat:18 },
+    "زبدة الفول السوداني":{ calories:588, protein:25, carbs:20, fat:50 },
+    "فول سوداني":{ calories:567, protein:26, carbs:16, fat:49 },
+    "جبن":{ calories:350, protein:22, carbs:3, fat:28 },
+    "أفوكادو":{ calories:160, protein:2, carbs:8.5, fat:14.7 },
+    "زيت":{ calories:884, protein:0, carbs:0, fat:100 }
+};
+
+
+/* =====================================================
+   WORKOUT DATABASE
+===================================================== */
+
+const workouts = [
+    {
+        day:"اليوم 1",
+        title:"Lower Body - الجزء السفلي",
+        exercises:[
+            { name:"Squat", sets:"4 × 8-10", technique:"ثبت القدمين، افتح الركبتين مع اتجاه أصابع القدم، انزل بتحكم وحافظ على ظهرك ثابتًا." },
+            { name:"Romanian Deadlift", sets:"3 × 10-12", technique:"ادفع الحوض للخلف مع ثني بسيط للركبة وحافظ على الظهر محايدًا." },
+            { name:"Leg Press", sets:"3 × 10-12", technique:"ثبت الظهر على المقعد، انزل بالوزن بتحكم ولا تقفل الركبة بالكامل." },
+            { name:"Leg Curl", sets:"3 × 12-15", technique:"ثبت الحوض واضغط بالكعبين واسحب الوزن ببطء." },
+            { name:"Calf Raise", sets:"4 × 12-15", technique:"اصعد لأعلى نقطة، توقف لحظة، ثم انزل ببطء إلى تمدد كامل." }
+        ]
+    },
+    {
+        day:"اليوم 2",
+        title:"Upper Body - الجزء العلوي",
+        exercises:[
+            { name:"Chest Press", sets:"4 × 8-12", technique:"ثبت الكتفين للخلف، انزل ببطء ثم ادفع للأعلى بدون قفل المرفق." },
+            { name:"Lat Pulldown", sets:"4 × 8-12", technique:"اسحب البار باتجاه أعلى الصدر مع إبقاء الجسم ثابتًا." },
+            { name:"Seated Row", sets:"3 × 10-12", technique:"اسحب بالمرفق للخلف واعصر عضلات الظهر في نهاية الحركة." },
+            { name:"Shoulder Press", sets:"3 × 8-12", technique:"حافظ على الجذع ثابتًا واضغط للأعلى بشكل متحكم." },
+            { name:"Lateral Raise", sets:"3 × 12-15", technique:"ارفع الذراعين حتى مستوى الكتف تقريبًا مع ثني خفيف للمرفق." }
+        ]
+    },
+    {
+        day:"اليوم 3",
+        title:"Glutes & Hamstrings",
+        exercises:[
+            { name:"Hip Thrust", sets:"4 × 8-12", technique:"ادفع بالحوض للأعلى واضغط المؤخرة في أعلى الحركة بدون فرط تقويس الظهر." },
+            { name:"Bulgarian Split Squat", sets:"3 × 8-12", technique:"انزل بشكل مستقيم وحافظ على الركبة باتجاه أصابع القدم." },
+            { name:"Leg Curl", sets:"3 × 10-15", technique:"حافظ على الحوض ثابتًا وتحكم في النزول." },
+            { name:"Cable Kickback", sets:"3 × 12-15", technique:"حرك الرجل من مفصل الورك فقط ولا تلف الحوض." }
+        ]
+    },
+    {
+        day:"اليوم 4",
+        title:"راحة واستشفاء",
+        exercises:[
+            { name:"Walking", sets:"20-30 دقيقة", technique:"مشي خفيف إلى متوسط لتحريك الجسم والاستشفاء." },
+            { name:"Stretching", sets:"10 دقائق", technique:"تمدد خفيف بدون ألم، وركز على العضلات التي تمرنت عليها." }
+        ]
+    },
+    {
+        day:"اليوم 5",
+        title:"Full Body",
+        exercises:[
+            { name:"Goblet Squat", sets:"3 × 10-12", technique:"احمل الدمبل أمام الصدر، انزل بتحكم وادفع الأرض عند الصعود." },
+            { name:"Dumbbell Row", sets:"3 × 10-12", technique:"ثبت الظهر واسحب الدمبل باتجاه الورك." },
+            { name:"Dumbbell Romanian Deadlift", sets:"3 × 10-12", technique:"انزل بالدمبلز محاذية للرجلين وادفع الحوض للخلف." },
+            { name:"Push-ups", sets:"3 × Max", technique:"الجسم بline واحد، انزل بمستوى الصدر واضغط للأعلى." }
+        ]
+    }
+];
+
+
+/* =====================================================
+   APP STATE & LOGIC
+===================================================== */
+
+let user = JSON.parse(localStorage.getItem('nony_user')) || null;
+let meals = JSON.parse(localStorage.getItem('nony_meals')) || [];
+let weights = JSON.parse(localStorage.getItem('nony_weights')) || {};
+let currentAnalyzed = null;
+
+window.onload = function() {
+    if (user) {
+        showMainApp();
+    } else {
+        document.getElementById('startScreen').classList.remove('hidden');
+    }
+    renderWorkouts();
+};
+
+function openRegister(isEdit = false) {
+    closeModal('registerModal');
+    if (isEdit && user) {
+        document.getElementById('userName').value = user.name || '';
+        document.getElementById('userAge').value = user.age || '';
+        document.getElementById('userGender').value = user.gender || 'female';
+        document.getElementById('userWeight').value = user.weight || '';
+        document.getElementById('userHeight').value = user.height || '';
+        document.getElementById('userGoal').value = user.goal || 'maintain';
+        document.getElementById('activity').value = user.activity || '1.55';
+    }
+    document.getElementById('registerModal').classList.add('show');
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('show');
+}
+
+function skipRegister() {
+    user = {
+        name: "زائر",
+        age: 22,
+        gender: "female",
+        weight: 55,
+        height: 165,
+        goal: "maintain",
+        activity: 1.55,
+        calories: 2000
+    };
+    localStorage.setItem('nony_user', JSON.stringify(user));
+    showMainApp();
+}
+
+function createProfile() {
+    const name = document.getElementById('userName').value.trim() || "صديقتنا";
+    const age = parseFloat(document.getElementById('userAge').value) || 22;
+    const gender = document.getElementById('userGender').value;
+    const weight = parseFloat(document.getElementById('userWeight').value) || 55;
+    const height = parseFloat(document.getElementById('userHeight').value) || 165;
+    const goal = document.getElementById('userGoal').value;
+    const activity = parseFloat(document.getElementById('activity').value);
+
+    // حساب السعرات (Mifflin-St Jeor)
+    let bmr = (10 * weight) + (6.25 * height) - (5 * age);
+    bmr += (gender === 'male' ? 5 : -161);
+
+    let tdee = bmr * activity;
+    if (goal === 'gain') tdee += 350;
+    if (goal === 'loss') tdee -= 400;
+
+    user = { name, age, gender, weight, height, goal, activity, calories: Math.round(tdee) };
+    localStorage.setItem('nony_user', JSON.stringify(user));
+
+    closeModal('registerModal');
+    showMainApp();
+    showToast("تم حفظ بياناتك بنجاح! 🎯");
+}
+
+function showMainApp() {
+    document.getElementById('startScreen').classList.add('hidden');
+    document.getElementById('mainApp').classList.remove('hidden');
+    document.getElementById('welcomeName').innerText = `أهلاً ${user.name} 👋`;
+    updateUI();
+}
+
+function switchTab(tabName, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById(tabName + 'Tab').classList.add('active');
+    if (btn) btn.classList.add('active');
+}
+
+function openMealModal() {
+    document.getElementById('mealText').value = '';
+    document.getElementById('analyzeResult').classList.remove('show');
+    document.getElementById('mealModal').classList.add('show');
+}
+
+function analyzeMeal() {
+    const text = document.getElementById('mealText').value.trim();
+    if (!text) {
+        showToast("الرجاء كتابة محتوى الوجبة أولاً");
+        return;
     }
 
-    // حفظ أوزان التمارين في متصفح المستخدم تلقائياً
-    function saveWorkout(id) {
-        const weight = document.getElementById('w_weight_' + id).value;
-        const reps = document.getElementById('w_reps_' + id).value;
-        
-        localStorage.setItem('nony_w_' + id, weight);
-        localStorage.setItem('nony_r_' + id, reps);
-        
-        alert('تم حفظ الوزن والتكرارات بنجاح يا نوني! 💪✨');
-    }
+    let totalCal = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
+    
+    // محرك بسيط للتحليل استناداً لقاعدة البيانات
+    for (let foodName in foods) {
+        if (text.includes(foodName)) {
+            let item = foods[foodName];
+            // استخراج الأرقام القريبة من اسم الصنف إن وجدت، أو افتراض 100 جرام
+            let regex = new RegExp(foodName + `[^0-9]*([0-9]+)`, 'i');
+            let match = text.match(regex);
+            let qty = match ? parseFloat(match[1]) : 100;
 
-    // استرجاع الأوزان المحفوظة عند فتح الصفحة
-    window.onload = function() {
-        for(let i = 1; i <= 4; i++) {
-            if(localStorage.getItem('nony_w_' + i)) {
-                document.getElementById('w_weight_' + i).value = localStorage.getItem('nony_w_' + i);
-            }
-            if(localStorage.getItem('nony_r_' + i)) {
-                document.getElementById('w_reps_' + i).value = localStorage.getItem('nony_r_' + i);
+            if (item.unit) {
+                totalCal += item.calories * (qty > 10 ? 1 : qty);
+                totalPro += item.protein * (qty > 10 ? 1 : qty);
+                totalCarb += item.carbs * (qty > 10 ? 1 : qty);
+                totalFat += item.fat * (qty > 10 ? 1 : qty);
+            } else {
+                let factor = qty / 100;
+                totalCal += item.calories * factor;
+                totalPro += item.protein * factor;
+                totalCarb += item.carbs * factor;
+                totalFat += item.fat * factor;
             }
         }
+    }
+
+    // إذا لم يتطابق شي محدد، ضع قيم افتراضية تقديرية بناءً على النص
+    if (totalCal === 0) {
+        totalCal = 350;
+        totalPro = 20;
+        totalCarb = 40;
+        totalFat = 10;
+    }
+
+    currentAnalyzed = {
+        name: text,
+        calories: Math.round(totalCal),
+        protein: Math.round(totalPro),
+        carbs: Math.round(totalCarb),
+        fat: Math.round(totalFat)
     };
 
-    // حسابات اللياقة والتغذية المتقدمة الدقيقة
-    function calculateFitness() {
-        const gender = document.getElementById('gender').value;
-        const weight = parseFloat(document.getElementById('weight').value);
-        const height = parseFloat(document.getElementById('height').value);
-        const age = parseFloat(document.getElementById('age').value);
-        const activity = parseFloat(document.getElementById('activity').value);
-        const goal = document.getElementById('goal').value;
+    document.getElementById('resultMealName').innerText = text;
+    document.getElementById('resultCalories').innerText = currentAnalyzed.calories;
+    document.getElementById('resultProtein').innerText = currentAnalyzed.protein + 'g';
+    document.getElementById('resultCarbs').innerText = currentAnalyzed.carbs + 'g';
+    document.getElementById('resultFat').innerText = currentAnalyzed.fat + 'g';
+    document.getElementById('analyzeResult').classList.add('show');
+}
 
-        if (!weight || !height || !age) {
-            alert('الرجاء إدخال كافة البيانات بشكل صحيح');
-            return;
-        }
+function saveAnalyzedMeal() {
+    if (!currentAnalyzed) return;
+    meals.push(currentAnalyzed);
+    localStorage.setItem('nony_meals', JSON.stringify(meals));
+    closeModal('mealModal');
+    updateUI();
+    showToast("تم إضافة الوجبة بنجاح ✅");
+}
 
-        const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+function deleteMeal(index) {
+    meals.splice(index, 1);
+    localStorage.setItem('nony_meals', JSON.stringify(meals));
+    updateUI();
+    showToast("تم حذف الوجبة");
+}
 
-        let bmr = (10 * weight) + (6.25 * height) - (5 * age);
-        if (gender === 'male') {
-            bmr += 5;
-        } else {
-            bmr -= 161;
-        }
+function updateUI() {
+    let totalCal = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
+    
+    let mealListHTML = '';
+    if (meals.length === 0) {
+        mealListHTML = `<div class="empty"><div class="big">🍽️</div>لا توجد وجبات مسجلة اليوم</div>`;
+    } else {
+        meals.forEach((m, idx) => {
+            totalCal += m.calories;
+            totalPro += m.protein;
+            totalCarb += m.carbs;
+            totalFat += m.fat;
 
-        let tdee = bmr * activity;
-        if (goal === 'lose') tdee -= 450;
-        else if (goal === 'gain') tdee += 300;
-
-        const protein = (weight * 2.0).toFixed(0); 
-        const fats = ((tdee * 0.25) / 9).toFixed(0); 
-        const carbs = ((tdee - (protein * 4) - (fats * 9)) / 4).toFixed(0);
-        const water = ((weight * 35) / 1000).toFixed(1);
-
-        document.getElementById('resBMI').innerText = bmi;
-        document.getElementById('resBMR').innerText = Math.round(bmr) + " سعرة";
-        document.getElementById('resTDEE').innerText = Math.round(tdee) + " سعرة";
-        document.getElementById('resProtein').innerText = protein + " جم";
-        document.getElementById('resCarbs').innerText = carbs + " جم";
-        document.getElementById('resFats').innerText = fats + " جم";
-        document.getElementById('resWater').innerText = water + " لتر";
-
-        document.getElementById('resultBox').style.display = 'block';
+            mealListHTML += `
+                <div class="meal-card">
+                    <div class="meal-icon">🥗</div>
+                    <div class="meal-details">
+                        <h3>${m.name}</h3>
+                        <div class="meal-stats">
+                            <span>🔥 ${m.calories} kcal</span>
+                            <span>🥩 ${m.protein}g</span>
+                            <span>🍚 ${m.carbs}g</span>
+                            <span>🥑 ${m.fat}g</span>
+                        </div>
+                    </div>
+                    <button class="delete-btn" onclick="deleteMeal(${idx})">🗑️</button>
+                </div>
+            `;
+        });
     }
-</script>
 
+    document.getElementById('mealList').innerHTML = mealListHTML;
+    document.getElementById('mealCount').innerText = `${meals.length} وجبة`;
+    document.getElementById('todayCalories').innerText = totalCal;
+    document.getElementById('todayProtein').innerText = totalPro + 'g';
+    document.getElementById('todayCarbs').innerText = totalCarb + 'g';
+    document.getElementById('todayFat').innerText = totalFat + 'g';
+    
+    let goalCal = user ? user.calories : 2000;
+    document.getElementById('calorieGoalText').innerText = `${goalCal} kcal`;
+    
+    let progressPercent = Math.min(100, (totalCal / goalCal) * 100);
+    document.getElementById('calorieProgress').style.width = progressPercent + '%';
+
+    // تحديث بيانات البروفايل
+    if (user) {
+        document.getElementById('profileName').innerText = user.name;
+        document.getElementById('profileAge').innerText = user.age + ' سنة';
+        document.getElementById('profileWeight').innerText = user.weight + ' كجم';
+        document.getElementById('profileHeight').innerText = user.height + ' سم';
+        let goalText = user.goal === 'gain' ? 'تضخيم وعضلات' : user.goal === 'loss' ? 'خسارة دهون' : 'محافظة على الوزن';
+        document.getElementById('profileGoal').innerText = goalText;
+        document.getElementById('profileCalories').innerText = user.calories + ' kcal';
+    }
+}
+
+function renderWorkouts() {
+    let html = '';
+    workouts.forEach((w, wIdx) => {
+        let exercisesHTML = '';
+        w.exercises.forEach((ex, eIdx) => {
+            let key = `w_${wIdx}_e_${eIdx}`;
+            let savedWeight = weights[key] || '';
+            exercisesHTML += `
+                <div class="exercise">
+                    <div class="exercise-top">
+                        <span class="exercise-name">${ex.name}</span>
+                        <span class="exercise-info">${ex.sets}</span>
+                    </div>
+                    <div class="exercise-technique">${ex.technique}</div>
+                    <div class="weight-row">
+                        <input type="text" id="${key}" placeholder="سجل الوزن أو الملاحظة (مثال: 15 كجم)" value="${savedWeight}">
+                        <button class="save-weight" onclick="saveWeight('${key}')">حفظ</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += `
+            <div class="workout-card">
+                <div class="workout-head">
+                    <div>
+                        <span class="workout-day">${w.day}</span>
+                        <h3>${w.title}</h3>
+                    </div>
+                </div>
+                ${exercisesHTML}
+            </div>
+        `;
+    });
+    document.getElementById('workoutList').innerHTML = html;
+}
+
+function saveWeight(key) {
+    let val = document.getElementById(key).value;
+    weights[key] = val;
+    localStorage.setItem('nony_weights', JSON.stringify(weights));
+    showToast("تم حفظ الوزن بنجاح 💪");
+}
+
+function resetApp() {
+    if (confirm("هل أنت متأكد من حذف كافة بيانات التطبيق؟")) {
+        localStorage.clear();
+        location.reload();
+    }
+}
+
+function openProfile() {
+    switchTab('profile', document.querySelectorAll('.nav-btn')[3]);
+}
+
+function showToast(msg) {
+    let t = document.getElementById('toast');
+    t.innerText = msg;
+    t.classList.add('show');
+    setTimeout(() => {
+        t.classList.remove('show');
+    }, 2500);
+}
+
+</script>
 </body>
 </html>
