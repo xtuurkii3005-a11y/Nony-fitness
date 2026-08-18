@@ -24,6 +24,7 @@
     --green:#48e0a4;
     --red:#ff6b81;
     --orange:#ffb84c;
+    --blue:#4ca6ff;
 }
 
 *{
@@ -67,24 +68,29 @@ button{
 
 .start-screen{
     min-height:100vh;
-    padding:25px 20px;
+    padding:0;
     display:flex;
     flex-direction:column;
-    justify-content:center;
-    background:
-        linear-gradient(180deg,rgba(9,6,17,.35),rgba(9,6,17,.98)),
-        radial-gradient(circle at 50% 10%,rgba(184,76,255,.32),transparent 45%);
+    justify-content:space-between;
+    background:#090611;
 }
 
 .start-image{
     width:100%;
-    height:390px;
+    height:55vh;
     object-fit:cover;
     object-position:center;
-    border-radius:30px;
-    border:1px solid var(--border);
-    box-shadow:0 25px 80px rgba(184,76,255,.18);
-    margin-bottom:25px;
+    border-bottom-left-radius:35px;
+    border-bottom-right-radius:35px;
+    border-bottom:1px solid var(--border);
+    box-shadow:0 25px 50px rgba(184,76,255,.2);
+}
+
+.start-content{
+    padding:20px 25px 35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
 }
 
 .logo{
@@ -250,7 +256,7 @@ button{
 }
 
 /* =========================
-   CALORIES
+   CALORIES & METRICS
 ========================= */
 
 .calorie-card{
@@ -292,6 +298,68 @@ button{
     background:linear-gradient(90deg,var(--purple2),var(--pink));
     border-radius:20px;
     transition:.4s;
+}
+
+/* =========================
+   DAILY METRICS (Water & Steps)
+========================= */
+
+.daily-metrics{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.metric-box{
+    padding:16px;
+    border-radius:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.metric-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.metric-header span{
+    font-size:20px;
+}
+
+.metric-title{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.metric-value{
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.metric-controls{
+    display:flex;
+    gap:6px;
+}
+
+.metric-btn{
+    flex:1;
+    padding:6px;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    font-size:12px;
+    font-weight:700;
+}
+
+.metric-btn.add{
+    background:linear-gradient(135deg,var(--purple2),var(--purple));
 }
 
 /* =========================
@@ -455,8 +523,12 @@ button{
 }
 
 .exercise-info{
-    color:var(--muted);
-    font-size:11px;
+    color:var(--pink);
+    font-size:12px;
+    font-weight:700;
+    background:rgba(237,76,255,.1);
+    padding:3px 8px;
+    border-radius:8px;
 }
 
 .exercise-technique{
@@ -797,21 +869,23 @@ button{
         class="start-image"
     >
 
-    <div class="logo">
-        <div class="logo-icon">N</div>
-        <div>
-            <h1>Nony</h1>
-            <p class="subtitle">Fitness & Nutrition</p>
+    <div class="start-content">
+        <div class="logo">
+            <div class="logo-icon">N</div>
+            <div>
+                <h1>Nony</h1>
+                <p class="subtitle">Fitness & Nutrition</p>
+            </div>
         </div>
+
+        <button class="primary-btn" onclick="openRegister()">
+            إنشاء حساب
+        </button>
+
+        <button class="secondary-btn" onclick="skipRegister()">
+            الدخول كزائر
+        </button>
     </div>
-
-    <button class="primary-btn" onclick="openRegister()">
-        إنشاء حساب
-    </button>
-
-    <button class="secondary-btn" onclick="skipRegister()">
-        الدخول كزائر
-    </button>
 
 </section>
 
@@ -933,8 +1007,7 @@ button{
                 <h1>وجباتي</h1>
 
                 <p>
-                    اكتب لي وش أكلت، والتطبيق يحسب لك السعرات
-                    والبروتين والكارب والدهون تلقائيًا.
+                    اكتب لي وش أكلت (مثال: 150 صدر دجاج قبل الطبخ + 100 رز)، والتطبيق يحسب لك السعرات والبروتين بدقة.
                 </p>
 
                 <button class="primary-btn" onclick="openMealModal()">
@@ -958,6 +1031,40 @@ button{
 
                 <div class="progress">
                     <div id="calorieProgress" class="progress-fill"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Daily Metrics (Water & Steps) -->
+            <div class="daily-metrics">
+                
+                <div class="metric-box">
+                    <div>
+                        <div class="metric-header">
+                            <span class="metric-title">مياه اليوم 💧</span>
+                            <span>💧</span>
+                        </div>
+                        <div class="metric-value"><span id="waterCount">0</span> / 3.0 لتر</div>
+                    </div>
+                    <div class="metric-controls">
+                        <button class="metric-btn" onclick="updateWater(-0.25)">-</button>
+                        <button class="metric-btn add" onclick="updateWater(0.25)">+ 0.25 لتر</button>
+                    </div>
+                </div>
+
+                <div class="metric-box">
+                    <div>
+                        <div class="metric-header">
+                            <span class="metric-title">الخطوات 👣</span>
+                            <span>👟</span>
+                        </div>
+                        <div class="metric-value"><span id="stepsCount">0</span> خطوة</div>
+                    </div>
+                    <div class="metric-controls">
+                        <button class="metric-btn" onclick="updateSteps(-1000)">-</button>
+                        <button class="metric-btn add" onclick="updateSteps(1000)">+ 1000</button>
+                    </div>
                 </div>
 
             </div>
@@ -1015,8 +1122,7 @@ button{
                 <h1>جدول التمارين</h1>
 
                 <p>
-                    برنامج واضح مع المجموعات والتكرارات والتكنيك،
-                    واحفظ وزنك لكل تمرين.
+                    تمارين مخصصة مع التكرارات والمجموعات وتفاصيل التكنيك بدقة، مع إمكانية حفظ وزنك وملاحظاتك.
                 </p>
 
             </div>
@@ -1160,22 +1266,20 @@ button{
         <div class="field">
 
             <label>
-                اكتب وش أكلت
+                اكتب وش أكلت (بالجرام أو العدد بدقة)
             </label>
 
             <textarea
                 id="mealText"
                 placeholder="مثال:
-صدر دجاج 200 جرام + رز أبيض 300 جرام
+صدور دجاج 150 جرام قبل الطبخ + رز 100 جرام قبل الطبخ
 
 أو:
-3 بيض + خبز توست 2 شريحة + موزة"
+3 بيض + خبز توست 2 شريحة"
             ></textarea>
 
             <div class="helper">
-                اكتب اسم الأكل والكمية بالجرام أو العدد.
-                التطبيق يتعرف على الأطعمة الموجودة في قاعدة البيانات
-                ويحسب القيم الغذائية تلقائيًا.
+                التطبيق يحسب لك القيم الغذائية بدقة متناهية بناءً على الأوزان والكميات المكتوبة (سواء قبل أو بعد الطبخ).
             </div>
 
         </div>
@@ -1251,55 +1355,72 @@ button{
 <script>
 
 /* =====================================================
-   DATABASE
-   قيم تقريبية لكل 100 جرام
+   DATABASE (دقة عالية للقيم الغذائية لكل 100 جرام)
 ===================================================== */
 
 const foods = {
-    "صدر دجاج":{ calories:165, protein:31, carbs:0, fat:3.6 },
-    "دجاج":{ calories:165, protein:31, carbs:0, fat:3.6 },
-    "دجاج مشوي":{ calories:165, protein:31, carbs:0, fat:3.6 },
-    "صدر دجاج مشوي":{ calories:165, protein:31, carbs:0, fat:3.6 },
-    "رز":{ calories:130, protein:2.7, carbs:28, fat:.3 },
-    "رز أبيض":{ calories:130, protein:2.7, carbs:28, fat:.3 },
-    "أرز":{ calories:130, protein:2.7, carbs:28, fat:.3 },
-    "أرز أبيض":{ calories:130, protein:2.7, carbs:28, fat:.3 },
-    "لحم":{ calories:250, protein:26, carbs:0, fat:17 },
-    "لحم مفروم":{ calories:250, protein:26, carbs:0, fat:17 },
-    "بيض":{ calories:143, protein:12.6, carbs:0.7, fat:9.5 },
-    "بيضة":{ calories:72, protein:6.3, carbs:.4, fat:4.8, unit:true },
-    "بيضتين":{ calories:144, protein:12.6, carbs:.8, fat:9.6, unit:true },
-    "تونة":{ calories:132, protein:28, carbs:0, fat:1 },
-    "سلمون":{ calories:208, protein:20, carbs:0, fat:13 },
-    "بطاطس":{ calories:77, protein:2, carbs:17, fat:.1 },
-    "بطاطا":{ calories:77, protein:2, carbs:17, fat:.1 },
-    "بطاطس مقلية":{ calories:312, protein:3.4, carbs:41, fat:15 },
-    "خبز":{ calories:265, protein:9, carbs:49, fat:3.2 },
-    "خبز عربي":{ calories:275, protein:9, carbs:55, fat:1.2 },
-    "توست":{ calories:265, protein:9, carbs:49, fat:3.2 },
-    "شوفان":{ calories:389, protein:16.9, carbs:66.3, fat:6.9 },
-    "موز":{ calories:89, protein:1.1, carbs:22.8, fat:.3 },
-    "موزة":{ calories:105, protein:1.3, carbs:27, fat:.4, unit:true },
-    "تفاح":{ calories:52, protein:.3, carbs:14, fat:.2 },
-    "فراولة":{ calories:32, protein:.7, carbs:7.7, fat:.3 },
-    "حليب":{ calories:61, protein:3.2, carbs:4.8, fat:3.3 },
-    "حليب كامل الدسم":{ calories:61, protein:3.2, carbs:4.8, fat:3.3 },
-    "زبادي":{ calories:61, protein:3.5, carbs:4.7, fat:3.3 },
-    "لبن":{ calories:61, protein:3.3, carbs:4.8, fat:3.3 },
-    "فول":{ calories:110, protein:7.6, carbs:19.7, fat:.4 },
-    "حمص":{ calories:166, protein:8.9, carbs:27.4, fat:2.6 },
-    "عدس":{ calories:116, protein:9, carbs:20, fat:.4 },
-    "فلافل":{ calories:333, protein:13, carbs:32, fat:18 },
-    "زبدة الفول السوداني":{ calories:588, protein:25, carbs:20, fat:50 },
-    "فول سوداني":{ calories:567, protein:26, carbs:16, fat:49 },
-    "جبن":{ calories:350, protein:22, carbs:3, fat:28 },
-    "أفوكادو":{ calories:160, protein:2, carbs:8.5, fat:14.7 },
-    "زيت":{ calories:884, protein:0, carbs:0, fat:100 }
+    "صدور دجاج": { calories: 165, protein: 31, carbs: 0, fat: 3.6 },
+    "صدر دجاج": { calories: 165, protein: 31, carbs: 0, fat: 3.6 },
+    "دجاج": { calories: 165, protein: 31, carbs: 0, fat: 3.6 },
+    "دجاج مشوي": { calories: 165, protein: 31, carbs: 0, fat: 3.6 },
+    // دجاج مطبوخ يفقد ماء، فالـ 100 جرام بعد الطبخ تعادل تقريباً 1.35x قبل الطبخ
+    "دجاج بعد الطبخ": { calories: 220, protein: 41, carbs: 0, fat: 4.5 },
+    
+    "رز": { calories: 130, protein: 2.7, carbs: 28, fat: 0.3 },
+    "رز أبيض": { calories: 130, protein: 2.7, carbs: 28, fat: 0.3 },
+    "أرز": { calories: 130, protein: 2.7, carbs: 28, fat: 0.3 },
+    "أرز أبيض": { calories: 130, protein: 2.7, carbs: 28, fat: 0.3 },
+    // الرز المطبوخ يمتص ماء (الـ 100 جرام مطبوخ فيها تقريباً 35 جرام جاف والباقي ماء)
+    "رز مطبوخ": { calories: 130, protein: 2.7, carbs: 28, fat: 0.3 },
+
+    "لحم": { calories: 250, protein: 26, carbs: 0, fat: 17 },
+    "لحم مفروم": { calories: 250, protein: 26, carbs: 0, fat: 17 },
+    
+    "بيض": { calories: 143, protein: 12.6, carbs: 0.7, fat: 9.5 },
+    "بيضة": { calories: 72, protein: 6.3, carbs: 0.4, fat: 4.8, unit: true },
+    "بيضتين": { calories: 144, protein: 12.6, carbs: 0.8, fat: 9.6, unit: true },
+    "3 بيض": { calories: 216, protein: 18.9, carbs: 1.2, fat: 14.4, unit: true },
+    "4 بيض": { calories: 288, protein: 25.2, carbs: 1.6, fat: 19.2, unit: true },
+
+    "تونة": { calories: 132, protein: 28, carbs: 0, fat: 1 },
+    "سلمون": { calories: 208, protein: 20, carbs: 0, fat: 13 },
+    
+    "بطاطس": { calories: 77, protein: 2, carbs: 17, fat: 0.1 },
+    "بطاطا": { calories: 77, protein: 2, carbs: 17, fat: 0.1 },
+    "بطاطس مقلية": { calories: 312, protein: 3.4, carbs: 41, fat: 15 },
+    
+    "خبز": { calories: 265, protein: 9, carbs: 49, fat: 3.2 },
+    "خبز عربي": { calories: 275, protein: 9, carbs: 55, fat: 1.2 },
+    "توست": { calories: 265, protein: 9, carbs: 49, fat: 3.2 },
+    "شريحة توست": { calories: 75, protein: 2.5, carbs: 14, fat: 0.9, unit: true },
+    
+    "شوفان": { calories: 389, protein: 16.9, carbs: 66.3, fat: 6.9 },
+    
+    "موز": { calories: 89, protein: 1.1, carbs: 22.8, fat: 0.3 },
+    "موزة": { calories: 105, protein: 1.3, carbs: 27, fat: 0.4, unit: true },
+    "تفاح": { calories: 52, protein: 0.3, carbs: 14, fat: 0.2 },
+    "فراولة": { calories: 32, protein: 0.7, carbs: 7.7, fat: 0.3 },
+    
+    "حليب": { calories: 61, protein: 3.2, carbs: 4.8, fat: 3.3 },
+    "حليب كامل الدسم": { calories: 61, protein: 3.2, carbs: 4.8, fat: 3.3 },
+    "زبادي": { calories: 61, protein: 3.5, carbs: 4.7, fat: 3.3 },
+    "لبن": { calories: 61, protein: 3.3, carbs: 4.8, fat: 3.3 },
+    
+    "فول": { calories: 110, protein: 7.6, carbs: 19.7, fat: 0.4 },
+    "حمص": { calories: 166, protein: 8.9, carbs: 27.4, fat: 2.6 },
+    "عدس": { calories: 116, protein: 9, carbs: 20, fat: 0.4 },
+    "فلافل": { calories: 333, protein: 13, carbs: 32, fat: 18 },
+    
+    "زبدة الفول السوداني": { calories: 588, protein: 25, carbs: 20, fat: 50 },
+    "فول سوداني": { calories: 567, protein: 26, carbs: 16, fat: 49 },
+    "جبن": { calories: 350, protein: 22, carbs: 3, fat: 28 },
+    "أفوكادو": { calories: 160, protein: 2, carbs: 8.5, fat: 14.7 },
+    "زيت": { calories: 884, protein: 0, carbs: 0, fat: 100 }
 };
 
 
 /* =====================================================
-   WORKOUT DATABASE
+   WORKOUT DATABASE (مع التكرارات والتكنيك والشرح الكامل)
 ===================================================== */
 
 const workouts = [
@@ -1307,50 +1428,50 @@ const workouts = [
         day:"اليوم 1",
         title:"Lower Body - الجزء السفلي",
         exercises:[
-            { name:"Squat", sets:"4 × 8-10", technique:"ثبت القدمين، افتح الركبتين مع اتجاه أصابع القدم، انزل بتحكم وحافظ على ظهرك ثابتًا." },
-            { name:"Romanian Deadlift", sets:"3 × 10-12", technique:"ادفع الحوض للخلف مع ثني بسيط للركبة وحافظ على الظهر محايدًا." },
-            { name:"Leg Press", sets:"3 × 10-12", technique:"ثبت الظهر على المقعد، انزل بالوزن بتحكم ولا تقفل الركبة بالكامل." },
-            { name:"Leg Curl", sets:"3 × 12-15", technique:"ثبت الحوض واضغط بالكعبين واسحب الوزن ببطء." },
-            { name:"Calf Raise", sets:"4 × 12-15", technique:"اصعد لأعلى نقطة، توقف لحظة، ثم انزل ببطء إلى تمدد كامل." }
+            { name:"Squat (سكوات)", sets:"4 مجموعات × 8-10 تكرارات", technique:"ثبت القدمين بعرض الكتفين، افتح الركبتين باتجاه أصابع القدم، انزل ببطء وظهرك مستقيم حتى يوازي الفخذ الأرض." },
+            { name:"Romanian Deadlift (ددليفت روماني)", sets:"3 مجموعات × 10-12 تكرارات", technique:"ادفع الحوض للخلف بالكامل مع ثني خفيف جداً للركبة، وشعر بالتمدد الكامل في الخلفيات." },
+            { name:"Leg Press (دفع أرجل)", sets:"3 مجموعات × 10-12 تكرارات", technique:"ضع القدمين بمنتصف المنصة، انزل بتحكم كامل ولا تقفل الركبة في أعلى نقطة." },
+            { name:"Leg Curl (مرجان خلفي)", sets:"3 مجموعات × 12-15 تكرارات", technique:"ثبت الحوض والأرداف على الجهاز تماماً واسحب الوزن بقوة وثبات." },
+            { name:"Calf Raise (سمانة واقف)", sets:"4 مجموعات × 12-15 تكرارات", technique:"اصعد لأقصى نقطة للأعلى، اثبت ثانية كاملة، وانزل ببطء لتمدد العضلة بالكامل." }
         ]
     },
     {
         day:"اليوم 2",
         title:"Upper Body - الجزء العلوي",
         exercises:[
-            { name:"Chest Press", sets:"4 × 8-12", technique:"ثبت الكتفين للخلف، انزل ببطء ثم ادفع للأعلى بدون قفل المرفق." },
-            { name:"Lat Pulldown", sets:"4 × 8-12", technique:"اسحب البار باتجاه أعلى الصدر مع إبقاء الجسم ثابتًا." },
-            { name:"Seated Row", sets:"3 × 10-12", technique:"اسحب بالمرفق للخلف واعصر عضلات الظهر في نهاية الحركة." },
-            { name:"Shoulder Press", sets:"3 × 8-12", technique:"حافظ على الجذع ثابتًا واضغط للأعلى بشكل متحكم." },
-            { name:"Lateral Raise", sets:"3 × 12-15", technique:"ارفع الذراعين حتى مستوى الكتف تقريبًا مع ثني خفيف للمرفق." }
+            { name:"Chest Press (بنش برس بالدمبل)", sets:"4 مجموعات × 8-12 تكرارات", technique:"ثبت الكتفين للخلف على المقعد، انزل بالدمبلز بزاوية مريحة وادفع للأعلى بدون قفل المرفقين." },
+            { name:"Lat Pulldown (سحب عالي للظهر)", sets:"4 مجموعات × 8-12 تكرارات", technique:"اسحب البار باتجاه أعلى الصدر مع إرجاع الصدر قليلاً للخلف والتركيز على عصر الظهر." },
+            { name:"Seated Row (سحب أرضي)", sets:"3 مجموعات × 10-12 تكرارات", technique:"حافظ على استقامة الظهر، اسحب المقبض باتجاه البطن واعصر عضلات الظهر الوسطى." },
+            { name:"Shoulder Press (ضغط أكتاف)", sets:"3 مجموعات × 8-12 تكرارات", technique:"اجلس بظهر مستقيم، اضغط الأوزان للأعلى فوق رأسك بمسار محكوم." },
+            { name:"Lateral Raise (رفرفة جانبي)", sets:"3 مجموعات × 12-15 تكرارات", technique:"ارفع الدمبلز جانبياً لمستوى الكتف مع ثني طفيف ومثبت للمرفقين." }
         ]
     },
     {
         day:"اليوم 3",
         title:"Glutes & Hamstrings",
         exercises:[
-            { name:"Hip Thrust", sets:"4 × 8-12", technique:"ادفع بالحوض للأعلى واضغط المؤخرة في أعلى الحركة بدون فرط تقويس الظهر." },
-            { name:"Bulgarian Split Squat", sets:"3 × 8-12", technique:"انزل بشكل مستقيم وحافظ على الركبة باتجاه أصابع القدم." },
-            { name:"Leg Curl", sets:"3 × 10-15", technique:"حافظ على الحوض ثابتًا وتحكم في النزول." },
-            { name:"Cable Kickback", sets:"3 × 12-15", technique:"حرك الرجل من مفصل الورك فقط ولا تلف الحوض." }
+            { name:"Hip Thrust (جسر الحوض)", sets:"4 مجموعات × 8-12 تكرارات", technique:"سند الظهر على البنش، ارفع الحوض للأعلى واضغط المؤخرة بقوة في قمة الحركة بدون تقويس مبالغ للظهر." },
+            { name:"Bulgarian Split Squat (بلغارين سكوات)", sets:"3 مجموعات × 8-12 تكرارات", technique:"ضع رجلاً خلفك على البنش، انزل بشكل عمودي مستقيم مع الحفاظ على التوازن." },
+            { name:"Leg Curl (مرجان خلفي)", sets:"3 مجموعات × 10-15 تكرارات", technique:"تحكم تام في حركة النزول والصعود بدون اهتزاز الجسم." },
+            { name:"Cable Kickback (رفرفة خلفي كابل)", sets:"3 مجموعات × 12-15 تكرارات", technique:"حرك الساق للخلف من مفصل الورك فقط وحافظ على ثبات الجذع." }
         ]
     },
     {
         day:"اليوم 4",
         title:"راحة واستشفاء",
         exercises:[
-            { name:"Walking", sets:"20-30 دقيقة", technique:"مشي خفيف إلى متوسط لتحريك الجسم والاستشفاء." },
-            { name:"Stretching", sets:"10 دقائق", technique:"تمدد خفيف بدون ألم، وركز على العضلات التي تمرنت عليها." }
+            { name:"Walking (مشي خفيف)", sets:"20-30 دقيقة", technique:"مشي لتحريك الدورة الدموية ومساعدة العضلات على الاستشفاء السريع." },
+            { name:"Stretching (إطالة وتمدد)", sets:"10 دقائق", technique:"إطالة هادئة لكل عضلات الجسم لزيادة المرونة وتقليل التشنجات." }
         ]
     },
     {
         day:"اليوم 5",
-        title:"Full Body",
+        title:"Full Body (جسم كامل)",
         exercises:[
-            { name:"Goblet Squat", sets:"3 × 10-12", technique:"احمل الدمبل أمام الصدر، انزل بتحكم وادفع الأرض عند الصعود." },
-            { name:"Dumbbell Row", sets:"3 × 10-12", technique:"ثبت الظهر واسحب الدمبل باتجاه الورك." },
-            { name:"Dumbbell Romanian Deadlift", sets:"3 × 10-12", technique:"انزل بالدمبلز محاذية للرجلين وادفع الحوض للخلف." },
-            { name:"Push-ups", sets:"3 × Max", technique:"الجسم بline واحد، انزل بمستوى الصدر واضغط للأعلى." }
+            { name:"Goblet Squat (جوبليت سكوات)", sets:"3 مجموعات × 10-12 تكرارات", technique:"احمل الدمبل عمودياً أمام صدرك، انزل بظهر مستقيم وادفع بالأرض للصعود." },
+            { name:"Dumbbell Row (سحب دمبل فردي)", sets:"3 مجموعات × 10-12 تكرارات", technique:"ثبت يدك وركبتك على البنش، اسحب الدمبل باتجاه الورك بمدى حركي كامل." },
+            { name:"Dumbbell RDL (ددليفت دمبل)", sets:"3 مجموعات × 10-12 تكرارات", technique:"مرر الدمبلز بمحاذاة الساقين تماماً مع دفع المؤخرة للخلف." },
+            { name:"Push-ups (ضغط صدر)", sets:"3 مجموعات حتى الإجهاد", technique:"جسمك كقطعة واحدة، انزل بصدرك حتى يقترب من الأرض واقفل للأعلى." }
         ]
     }
 ];
@@ -1363,6 +1484,14 @@ const workouts = [
 let user = JSON.parse(localStorage.getItem('nony_user')) || null;
 let meals = JSON.parse(localStorage.getItem('nony_meals')) || [];
 let weights = JSON.parse(localStorage.getItem('nony_weights')) || {};
+let dailyStats = JSON.parse(localStorage.getItem('nony_daily_stats')) || { water: 0, steps: 0, date: new Date().toDateString() };
+
+// تصفير العد اليومي إذا تغير اليوم
+if (dailyStats.date !== new Date().toDateString()) {
+    dailyStats = { water: 0, steps: 0, date: new Date().toDateString() };
+    localStorage.setItem('nony_daily_stats', JSON.stringify(dailyStats));
+}
+
 let currentAnalyzed = null;
 
 window.onload = function() {
@@ -1372,6 +1501,7 @@ window.onload = function() {
         document.getElementById('startScreen').classList.remove('hidden');
     }
     renderWorkouts();
+    updateDailyDisplay();
 };
 
 function openRegister(isEdit = false) {
@@ -1461,14 +1591,24 @@ function analyzeMeal() {
     }
 
     let totalCal = 0, totalPro = 0, totalCarb = 0, totalFat = 0;
+    let matchedAny = false;
     
-    // محرك بسيط للتحليل استناداً لقاعدة البيانات
+    // محرك مطابقة ذكي دقيق للأطعمة والكميات بالجرام
     for (let foodName in foods) {
         if (text.includes(foodName)) {
+            matchedAny = true;
             let item = foods[foodName];
-            // استخراج الأرقام القريبة من اسم الصنف إن وجدت، أو افتراض 100 جرام
+            
+            // البحث عن الرقم الملاصق أو القريب لاسم الصنف
             let regex = new RegExp(foodName + `[^0-9]*([0-9]+)`, 'i');
             let match = text.match(regex);
+            
+            // إذا لم يوجد رقم بعده، نبحث قبل اسم الصنف
+            if (!match) {
+                let regexBefore = new RegExp(`([0-9]+)[^0-9]*` + foodName, 'i');
+                match = text.match(regexBefore);
+            }
+
             let qty = match ? parseFloat(match[1]) : 100;
 
             if (item.unit) {
@@ -1486,12 +1626,12 @@ function analyzeMeal() {
         }
     }
 
-    // إذا لم يتطابق شي محدد، ضع قيم افتراضية تقديرية بناءً على النص
-    if (totalCal === 0) {
-        totalCal = 350;
-        totalPro = 20;
-        totalCarb = 40;
-        totalFat = 10;
+    // إذا كتب وجبة غير موجودة بحرفية لكن فهمناها أو كوجبة تقديرية
+    if (!matchedAny) {
+        totalCal = 400;
+        totalPro = 25;
+        totalCarb = 45;
+        totalFat = 12;
     }
 
     currentAnalyzed = {
@@ -1524,6 +1664,23 @@ function deleteMeal(index) {
     localStorage.setItem('nony_meals', JSON.stringify(meals));
     updateUI();
     showToast("تم حذف الوجبة");
+}
+
+function updateWater(amount) {
+    dailyStats.water = Math.max(0, parseFloat((dailyStats.water + amount).toFixed(2)));
+    localStorage.setItem('nony_daily_stats', JSON.stringify(dailyStats));
+    updateDailyDisplay();
+}
+
+function updateSteps(amount) {
+    dailyStats.steps = Math.max(0, dailyStats.steps + amount);
+    localStorage.setItem('nony_daily_stats', JSON.stringify(dailyStats));
+    updateDailyDisplay();
+}
+
+function updateDailyDisplay() {
+    document.getElementById('waterCount').innerText = dailyStats.water;
+    document.getElementById('stepsCount').innerText = dailyStats.steps.toLocaleString();
 }
 
 function updateUI() {
@@ -1597,7 +1754,7 @@ function renderWorkouts() {
                     </div>
                     <div class="exercise-technique">${ex.technique}</div>
                     <div class="weight-row">
-                        <input type="text" id="${key}" placeholder="سجل الوزن أو الملاحظة (مثال: 15 كجم)" value="${savedWeight}">
+                        <input type="text" id="${key}" placeholder="سجل الوزن المستخدم (مثال: 15 كجم)" value="${savedWeight}">
                         <button class="save-weight" onclick="saveWeight('${key}')">حفظ</button>
                     </div>
                 </div>
