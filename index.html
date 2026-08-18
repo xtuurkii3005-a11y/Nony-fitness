@@ -1,2812 +1,665 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10091c">
-
-<title>Nony - Fitness & Nutrition</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
-
-:root{
-    --bg:#090611;
-    --bg2:#11091c;
-    --card:rgba(31,15,45,.78);
-    --card2:rgba(45,20,65,.62);
-    --purple:#b84cff;
-    --purple2:#7c3cff;
-    --pink:#ed4cff;
-    --border:rgba(218,165,255,.22);
-    --text:#fff;
-    --muted:#a99bb4;
-    --green:#48e0a4;
-    --red:#ff6b81;
-    --orange:#ffb84c;
-}
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:'Cairo',sans-serif;
-    background:
-        radial-gradient(circle at 80% 0%,rgba(184,76,255,.20),transparent 35%),
-        radial-gradient(circle at 10% 40%,rgba(124,60,255,.12),transparent 35%),
-        var(--bg);
-    color:var(--text);
-    min-height:100vh;
-}
-
-button,input,textarea,select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-    border:0;
-}
-
-.app{
-    width:100%;
-    max-width:520px;
-    min-height:100vh;
-    margin:auto;
-    position:relative;
-    overflow:hidden;
-    padding-bottom:90px;
-}
-
-/* =========================
-   START / REGISTER
-========================= */
-
-.start-screen{
-    min-height:100vh;
-    padding:25px 20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    background:
-        linear-gradient(180deg,rgba(9,6,17,.35),rgba(9,6,17,.98)),
-        radial-gradient(circle at 50% 10%,rgba(184,76,255,.32),transparent 45%);
-}
-
-.start-image{
-    width:100%;
-    height:390px;
-    object-fit:cover;
-    object-position:center;
-    border-radius:30px;
-    border:1px solid var(--border);
-    box-shadow:0 25px 80px rgba(184,76,255,.18);
-    margin-bottom:25px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:8px;
-}
-
-.logo-icon{
-    width:50px;
-    height:50px;
-    border-radius:17px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,var(--purple),var(--pink));
-    font-size:26px;
-    font-weight:900;
-}
-
-.logo h1{
-    font-size:28px;
-    font-weight:900;
-}
-
-.subtitle{
-    color:var(--muted);
-    margin-bottom:25px;
-}
-
-.primary-btn{
-    width:100%;
-    padding:17px 20px;
-    border-radius:18px;
-    color:#fff;
-    font-size:16px;
-    font-weight:800;
-    background:linear-gradient(135deg,var(--purple),var(--pink));
-    box-shadow:0 12px 30px rgba(184,76,255,.25);
-    transition:.2s;
-}
-
-.primary-btn:active{
-    transform:scale(.98);
-}
-
-.secondary-btn{
-    width:100%;
-    padding:16px;
-    margin-top:10px;
-    border-radius:18px;
-    color:#fff;
-    background:rgba(255,255,255,.06);
-    border:1px solid var(--border);
-    font-weight:700;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-    padding:24px 20px 18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid var(--border);
-    background:rgba(9,6,17,.75);
-    backdrop-filter:blur(20px);
-    position:sticky;
-    top:0;
-    z-index:20;
-}
-
-.user-info{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.avatar{
-    width:48px;
-    height:48px;
-    border-radius:16px;
-    object-fit:cover;
-    border:1px solid var(--border);
-}
-
-.header h2{
-    font-size:20px;
-}
-
-.header p{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.header-actions{
-    display:flex;
-    gap:8px;
-}
-
-.icon-btn{
-    width:44px;
-    height:44px;
-    border-radius:14px;
-    background:rgba(255,255,255,.06);
-    color:white;
-    border:1px solid var(--border);
-    font-size:20px;
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.content{
-    padding:20px;
-}
-
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:14px;
-}
-
-.section-title h2{
-    font-size:19px;
-}
-
-.section-title span{
-    color:var(--purple);
-    font-size:13px;
-}
-
-.hero-card{
-    padding:24px;
-    border-radius:28px;
-    background:
-        radial-gradient(circle at 20% 10%,rgba(237,76,255,.18),transparent 40%),
-        linear-gradient(145deg,rgba(45,20,65,.9),rgba(15,8,25,.95));
-    border:1px solid var(--border);
-    margin-bottom:20px;
-}
-
-.hero-label{
-    color:#c779ff;
-    font-size:13px;
-    margin-bottom:5px;
-}
-
-.hero-card h1{
-    font-size:31px;
-    line-height:1.4;
-    margin-bottom:8px;
-}
-
-.hero-card p{
-    color:var(--muted);
-    margin-bottom:20px;
-}
-
-/* =========================
-   CALORIES
-========================= */
-
-.calorie-card{
-    padding:20px;
-    border-radius:24px;
-    background:var(--card);
-    border:1px solid var(--border);
-    margin-bottom:20px;
-}
-
-.calorie-number{
-    display:flex;
-    align-items:flex-end;
-    gap:6px;
-    margin:8px 0 15px;
-}
-
-.calorie-number strong{
-    font-size:42px;
-    color:#d06aff;
-}
-
-.calorie-number span{
-    color:var(--muted);
-    margin-bottom:9px;
-}
-
-.progress{
-    width:100%;
-    height:9px;
-    border-radius:20px;
-    background:rgba(255,255,255,.08);
-    overflow:hidden;
-}
-
-.progress-fill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,var(--purple2),var(--pink));
-    border-radius:20px;
-    transition:.4s;
-}
-
-/* =========================
-   MACROS
-========================= */
-
-.macros{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-bottom:22px;
-}
-
-.macro{
-    padding:17px 10px;
-    border-radius:20px;
-    background:var(--card);
-    border:1px solid var(--border);
-    text-align:center;
-}
-
-.macro-icon{
-    font-size:22px;
-    margin-bottom:5px;
-}
-
-.macro strong{
-    display:block;
-    font-size:18px;
-}
-
-.macro span{
-    color:var(--muted);
-    font-size:11px;
-}
-
-/* =========================
-   MEALS
-========================= */
-
-.meal-card{
-    padding:18px;
-    border-radius:22px;
-    background:var(--card);
-    border:1px solid var(--border);
-    margin-bottom:12px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.meal-icon{
-    width:55px;
-    height:55px;
-    border-radius:17px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(184,76,255,.13);
-    font-size:27px;
-    flex-shrink:0;
-}
-
-.meal-details{
-    flex:1;
-}
-
-.meal-details h3{
-    font-size:15px;
-    margin-bottom:3px;
-}
-
-.meal-details p{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.meal-stats{
-    margin-top:7px;
-    display:flex;
-    gap:9px;
-    flex-wrap:wrap;
-}
-
-.meal-stats span{
-    font-size:10px;
-    color:#d7c9df;
-}
-
-.delete-btn{
-    color:var(--red);
-    background:none;
-    font-size:18px;
-}
-
-/* =========================
-   EMPTY
-========================= */
-
-.empty{
-    text-align:center;
-    padding:35px 20px;
-    border:1px dashed var(--border);
-    border-radius:22px;
-    color:var(--muted);
-}
-
-.empty .big{
-    font-size:40px;
-    margin-bottom:10px;
-}
-
-/* =========================
-   WORKOUTS
-========================= */
-
-.workout-card{
-    border-radius:23px;
-    background:var(--card);
-    border:1px solid var(--border);
-    margin-bottom:13px;
-    overflow:hidden;
-}
-
-.workout-head{
-    padding:18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.workout-head h3{
-    font-size:16px;
-}
-
-.workout-head p{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:2px;
-}
-
-.workout-day{
-    color:#d174ff;
-    font-size:12px;
-}
-
-.exercise{
-    padding:15px 18px;
-    border-top:1px solid rgba(255,255,255,.06);
-}
-
-.exercise-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.exercise-name{
-    font-weight:700;
-    font-size:14px;
-}
-
-.exercise-info{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.exercise-technique{
-    margin-top:9px;
-    color:#b9aabd;
-    font-size:11px;
-    line-height:1.8;
-}
-
-.weight-row{
-    display:flex;
-    gap:8px;
-    margin-top:10px;
-}
-
-.weight-row input{
-    width:100%;
-    padding:10px;
-    background:rgba(255,255,255,.06);
-    border:1px solid var(--border);
-    color:#fff;
-    border-radius:11px;
-    outline:none;
-    text-align:center;
-}
-
-.save-weight{
-    padding:0 13px;
-    border-radius:11px;
-    color:#fff;
-    background:linear-gradient(135deg,var(--purple2),var(--purple));
-    font-size:11px;
-    font-weight:700;
-}
-
-/* =========================
-   NAV
-========================= */
-
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(520px,100%);
-    padding:10px 15px calc(10px + env(safe-area-inset-bottom));
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:6px;
-    background:rgba(11,6,18,.92);
-    backdrop-filter:blur(25px);
-    border-top:1px solid var(--border);
-    z-index:50;
-}
-
-.nav-btn{
-    background:none;
-    color:var(--muted);
-    padding:8px 3px;
-    border-radius:14px;
-    font-size:10px;
-}
-
-.nav-btn .nav-icon{
-    display:block;
-    font-size:21px;
-    margin-bottom:2px;
-}
-
-.nav-btn.active{
-    color:#d06aff;
-    background:rgba(184,76,255,.10);
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(10px);
-    display:none;
-    align-items:flex-end;
-    justify-content:center;
-    z-index:100;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:min(520px,100%);
-    max-height:92vh;
-    overflow-y:auto;
-    background:
-        radial-gradient(circle at 80% 0%,rgba(184,76,255,.18),transparent 35%),
-        #130b1d;
-    border:1px solid var(--border);
-    border-radius:30px 30px 0 0;
-    padding:22px 20px 30px;
-    animation:slideUp .25s ease;
-}
-
-@keyframes slideUp{
-    from{transform:translateY(100%);}
-    to{transform:translateY(0);}
-}
-
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.modal-head h2{
-    font-size:21px;
-}
-
-.close{
-    width:40px;
-    height:40px;
-    border-radius:13px;
-    background:rgba(255,255,255,.07);
-    color:white;
-    font-size:21px;
-}
-
-.field{
-    margin-bottom:15px;
-}
-
-.field label{
-    display:block;
-    margin-bottom:7px;
-    font-size:12px;
-    color:#d6c9dc;
-}
-
-.field input,
-.field textarea,
-.field select{
-    width:100%;
-    padding:14px;
-    border-radius:15px;
-    border:1px solid var(--border);
-    outline:none;
-    background:rgba(255,255,255,.06);
-    color:white;
-    font-size:14px;
-}
-
-.field textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
-.field select option{
-    background:#180d22;
-}
-
-.helper{
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.8;
-    margin-top:7px;
-}
-
-.analyze-result{
-    display:none;
-    margin-top:18px;
-}
-
-.analyze-result.show{
-    display:block;
-}
-
-.result-card{
-    padding:18px;
-    border-radius:20px;
-    background:rgba(184,76,255,.08);
-    border:1px solid var(--border);
-}
-
-.result-card h3{
-    margin-bottom:12px;
-}
-
-.result-total{
-    font-size:30px;
-    color:#d16aff;
-    font-weight:900;
-    margin-bottom:12px;
-}
-
-.result-macros{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-}
-
-.result-macros div{
-    padding:10px;
-    border-radius:13px;
-    background:rgba(255,255,255,.05);
-    text-align:center;
-}
-
-.result-macros strong{
-    display:block;
-}
-
-.result-macros span{
-    font-size:9px;
-    color:var(--muted);
-}
-
-/* =========================
-   REGISTER
-========================= */
-
-.register-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.profile-summary{
-    padding:18px;
-    border-radius:22px;
-    background:var(--card);
-    border:1px solid var(--border);
-    margin-bottom:18px;
-}
-
-.profile-row{
-    display:flex;
-    justify-content:space-between;
-    padding:9px 0;
-    border-bottom:1px solid rgba(255,255,255,.05);
-    font-size:13px;
-}
-
-.profile-row:last-child{
-    border:0;
-}
-
-.profile-row span{
-    color:var(--muted);
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:95px;
-    transform:translateX(-50%) translateY(20px);
-    width:calc(100% - 40px);
-    max-width:480px;
-    padding:14px 17px;
-    border-radius:16px;
-    background:#24142e;
-    border:1px solid var(--border);
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
-    text-align:center;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    z-index:200;
-    font-size:12px;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-}
-
-/* =========================
-   HIDDEN
-========================= */
-
-.hidden{
-    display:none!important;
-}
-
-.tab{
-    display:none;
-}
-
-.tab.active{
-    display:block;
-}
-
-/* =========================
-   DESKTOP
-========================= */
-
-@media(min-width:700px){
-    body{
-        padding:20px;
-    }
-
-    .app{
-        border:1px solid var(--border);
-        border-radius:35px;
-        min-height:calc(100vh - 40px);
-    }
-
-    .bottom-nav{
-        bottom:20px;
-        border-radius:22px;
-        width:520px;
-        border:1px solid var(--border);
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nony Fitness & Nutrition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0712;
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --text-main: #ffffff;
+            --text-sub: #a19bb5;
+            --accent-purple: #a855f7;
+            --accent-pink: #ec4899;
+            --accent-glow: rgba(168, 85, 247, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+            padding: 10px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(18, 12, 28, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--card-border);
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+            height: 820px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen {
+            display: none;
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 90px;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .hero-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-purple);
+            box-shadow: 0 0 30px var(--accent-glow);
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: 14px;
+            border: none;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: white;
+        }
+
+        /* Dashboard */
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 4px;
+        }
+
+        /* Workouts Screen Styling */
+        .workout-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+
+        .workout-header {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .workout-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid var(--accent-purple);
+        }
+
+        .workout-inputs {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .input-track {
+            flex: 1;
+        }
+
+        .input-track label {
+            font-size: 11px;
+            color: var(--text-sub);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .input-track input {
+            width: 100%;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            color: white;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .save-btn {
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid var(--accent-purple);
+            color: #d8b4fe;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 8px;
+            width: 100%;
+            transition: 0.2s;
+        }
+
+        .save-btn:hover {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        /* Inputs & Calculator */
+        .input-group {
+            margin-bottom: 10px;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 3px;
+        }
+
+        .input-control, select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+        }
+
+        select option { background: #120c1c; }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15));
+            border: 1px solid var(--accent-purple);
+            border-radius: 16px;
+            padding: 14px;
+            margin-top: 14px;
+            display: none;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 13px;
+        }
+
+        .result-row:last-child { border-bottom: none; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px;
+            background: rgba(10, 6, 18, 0.95);
+            border-top: 1px solid var(--card-border);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-item {
+            color: var(--text-sub);
+            font-size: 11px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .nav-item.active {
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="app">
+<div class="app-container">
 
-<!-- =========================
-     START SCREEN
-========================= -->
+    <!-- 1. شاشة البداية -->
+    <div id="startScreen" class="screen active start-screen">
+        <img src="nony.jpg.png" alt="Nony Fitness" class="hero-img">
+        <h1 class="title">CardioCraze</h1>
+        <p class="subtitle">تطبيقك المتكامل للياقة، التغذية، ومتابعة الأوزان</p>
+        
+        <button class="btn btn-primary" onclick="showScreen('dashboardScreen')">الدخول للتطبيق</button>
+        <button class="btn btn-outline" onclick="showScreen('workoutScreen')">جدول تمارين البنات 🏋️‍♀️</button>
+        <button class="btn btn-outline" onclick="showScreen('calcScreen')">حاسبة السعرات الدقيقة 🧮</button>
+    </div>
 
-<section id="startScreen" class="start-screen">
+    <!-- 2. لوحة التحكم -->
+    <div id="dashboardScreen" class="screen">
+        <div class="dash-header">
+            <div class="user-info">
+                <img src="nony.jpg.png" alt="Nony" class="user-avatar">
+                <div>
+                    <h3 style="font-size: 15px;">أهلاً بك، نوني 👋</h3>
+                    <p style="font-size: 11px; color: var(--text-sub);">استمرّي بقوة نحو أهدافك</p>
+                </div>
+            </div>
+            <span style="font-size: 18px;">🔥</span>
+        </div>
 
-    <img
-        src="nony-giri.jpg"
-        alt="Nony"
-        class="start-image"
-    >
+        <div class="stats-grid">
+            <div class="glass-card" style="margin-bottom:0;">
+                <span style="font-size: 11px; color: var(--text-sub);">الخطوات اليومية</span>
+                <div class="stat-value">8,420</div>
+                <small style="color: #4ade80; font-size: 10px;">نشاط ممتاز</small>
+            </div>
+            <div class="glass-card" style="margin-bottom:0;">
+                <span style="font-size: 11px; color: var(--text-sub);">الماء المستهلك</span>
+                <div class="stat-value">2.1 لتر</div>
+                <small style="color: #38bdf8; font-size: 10px;">قريب من الهدف</small>
+            </div>
+        </div>
 
-    <div class="logo">
-        <div class="logo-icon">N</div>
-        <div>
-            <h1>Nony</h1>
-            <p class="subtitle">Fitness & Nutrition</p>
+        <div class="glass-card" style="margin-top: 14px; cursor: pointer;" onclick="showScreen('workoutScreen')">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h4 style="font-size: 14px; margin-bottom: 4px;">🏋️‍♀️ جدول تمارين البنات المخصص</h4>
+                    <p style="font-size: 12px; color: var(--text-sub);">اضغطي هنا لعرض التمارين وتسجيل الأوزان</p>
+                </div>
+                <span style="font-size: 18px; color: var(--accent-purple);">➔</span>
+            </div>
+        </div>
+
+        <div class="glass-card" style="cursor: pointer;" onclick="showScreen('calcScreen')">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h4 style="font-size: 14px; margin-bottom: 4px;">🧮 حاسبة السعرات والماكروز</h4>
+                    <p style="font-size: 12px; color: var(--text-sub);">احسبي سعراتك بدقة وتوزيعه الغذائي</p>
+                </div>
+                <span style="font-size: 18px; color: var(--accent-purple);">➔</span>
+            </div>
         </div>
     </div>
 
-    <button class="primary-btn" onclick="openRegister()">
-        إنشاء حساب
-    </button>
+    <!-- 3. شاشة جدول تمارين البنات مع حفظ الأوزان والتكرارات -->
+    <div id="workoutScreen" class="screen">
+        <h3 class="title" style="font-size: 18px; text-align: center; margin-bottom: 4px;">جدول تمارين البنات لشد الجسم</h3>
+        <p class="subtitle" style="text-align: center; margin-bottom: 16px;">سجّلي أوزانك وتكراراتك لكل تمرين لتحاملي تقدمك</p>
 
-    <button class="secondary-btn" onclick="skipRegister()">
-        الدخول كزائر
-    </button>
-
-</section>
-
-
-<!-- =========================
-     REGISTER MODAL
-========================= -->
-
-<div id="registerModal" class="modal">
-    <div class="modal-box">
-
-        <div class="modal-head">
-            <h2>إنشاء حسابك 👋</h2>
-            <button class="close" onclick="closeModal('registerModal')">×</button>
-        </div>
-
-        <div class="field">
-            <label>اسمك</label>
-            <input id="userName" type="text" placeholder="مثال: تركي">
-        </div>
-
-        <div class="register-grid">
-
-            <div class="field">
-                <label>العمر</label>
-                <input id="userAge" type="number" placeholder="22">
+        <!-- تمرين 1 -->
+        <div class="workout-card">
+            <div class="workout-header">
+                <img src="nony.jpg.png" alt="Squat" class="workout-icon">
+                <div>
+                    <h4 style="font-size: 14px; color: #fff;">1. سكوات بالأوزان (Barbell / Dumbbell Squat)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: الأرجل، المؤخرة، والشد السفلي. انزلي ببطء واصعدي بقوة.</p>
+                </div>
             </div>
+            <div class="workout-inputs">
+                <div class="input-track">
+                    <label>الوزن (كجم)</label>
+                    <input type="number" id="w_weight_1" placeholder="مثال: 20">
+                </div>
+                <div class="input-track">
+                    <label>التكرارات</label>
+                    <input type="number" id="w_reps_1" placeholder="مثال: 12">
+                </div>
+            </div>
+            <button class="save-btn" onclick="saveWorkout(1)">حفظ الأوزان والتكرارات 💾</button>
+        </div>
 
-            <div class="field">
-                <label>الجنس</label>
-                <select id="userGender">
-                    <option value="male">ذكر</option>
+        <!-- تمرين 2 -->
+        <div class="workout-card">
+            <div class="workout-header">
+                <img src="nony.jpg.png" alt="Hip Thrust" class="workout-icon">
+                <div>
+                    <h4 style="font-size: 14px; color: #fff;">2. هيب ثرست (Hip Thrust)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: عضلات المؤخرة والأرداف بشكل مباشر وعالي الفعالية.</p>
+                </div>
+            </div>
+            <div class="workout-inputs">
+                <div class="input-track">
+                    <label>الوزن (كجم)</label>
+                    <input type="number" id="w_weight_2" placeholder="مثال: 30">
+                </div>
+                <div class="input-track">
+                    <label>التكرارات</label>
+                    <input type="number" id="w_reps_2" placeholder="مثال: 12">
+                </div>
+            </div>
+            <button class="save-btn" onclick="saveWorkout(2)">حفظ الأوزان والتكرارات 💾</button>
+        </div>
+
+        <!-- تمرين 3 -->
+        <div class="workout-card">
+            <div class="workout-header">
+                <img src="nony.jpg.png" alt="RDL" class="workout-icon">
+                <div>
+                    <h4 style="font-size: 14px; color: #fff;">3. رومانيان ديدليفت (Romanian Deadlift)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: الخلفيات (Hamstrings) وشد الظهر السفلي.</p>
+                </div>
+            </div>
+            <div class="workout-inputs">
+                <div class="input-track">
+                    <label>الوزن (كجم)</label>
+                    <input type="number" id="w_weight_3" placeholder="مثال: 25">
+                </div>
+                <div class="input-track">
+                    <label>التكرارات</label>
+                    <input type="number" id="w_reps_3" placeholder="مثال: 10">
+                </div>
+            </div>
+            <button class="save-btn" onclick="saveWorkout(3)">حفظ الأوزان والتكرارات 💾</button>
+        </div>
+
+        <!-- تمرين 4 -->
+        <div class="workout-card">
+            <div class="workout-header">
+                <img src="nony.jpg.png" alt="Lat Pulldown" class="workout-icon">
+                <div>
+                    <h4 style="font-size: 14px; color: #fff;">4. سحب ظهر علوي (Lat Pulldown)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: عضلات الظهر العلوية لخصر منحتد وقوام مشدود.</p>
+                </div>
+            </div>
+            <div class="workout-inputs">
+                <div class="input-track">
+                    <label>الوزن (كجم)</label>
+                    <input type="number" id="w_weight_4" placeholder="مثال: 15">
+                </div>
+                <div class="input-track">
+                    <label>التكرارات</label>
+                    <input type="number" id="w_reps_4" placeholder="مثال: 12">
+                </div>
+            </div>
+            <button class="save-btn" onclick="saveWorkout(4)">حفظ الأوزان والتكرارات 💾</button>
+        </div>
+    </div>
+
+    <!-- 4. حاسبة السعرات والماكروز -->
+    <div id="calcScreen" class="screen">
+        <h3 class="title" style="font-size: 18px; text-align: center; margin-bottom: 14px;">حاسبة التغذية واللياقة</h3>
+
+        <div class="glass-card">
+            <div class="input-group">
+                <label>النوع / البروفايل:</label>
+                <select id="gender">
                     <option value="female">أنثى</option>
+                    <option value="male">ذكر</option>
                 </select>
             </div>
 
-            <div class="field">
-                <label>الوزن (كجم)</label>
-                <input id="userWeight" type="number" step="0.1" placeholder="55">
+            <div style="display: flex; gap: 8px;">
+                <div class="input-group" style="flex: 1;">
+                    <label>الوزن (كجم):</label>
+                    <input type="number" id="weight" class="input-control" placeholder="60">
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label>الطول (سم):</label>
+                    <input type="number" id="height" class="input-control" placeholder="165">
+                </div>
             </div>
 
-            <div class="field">
-                <label>الطول (سم)</label>
-                <input id="userHeight" type="number" placeholder="167">
+            <div style="display: flex; gap: 8px;">
+                <div class="input-group" style="flex: 1;">
+                    <label>العمر:</label>
+                    <input type="number" id="age" class="input-control" placeholder="23">
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label>الهدف:</label>
+                    <select id="goal">
+                        <option value="lose">إنقاص الوزن</option>
+                        <option value="maintain">المحافظة</option>
+                        <option value="gain">زيادة عضلات</option>
+                    </select>
+                </div>
             </div>
 
+            <div class="input-group">
+                <label>مستوى النشاط البدني:</label>
+                <select id="activity">
+                    <option value="1.2">خامل (بدون تمارين)</option>
+                    <option value="1.375">خفيف (1-3 أيام أسبوعياً)</option>
+                    <option value="1.55">متوسط (3-5 أيام أسبوعياً)</option>
+                    <option value="1.725">عالي (6-7 أيام أسبوعياً)</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="calculateFitness()" style="margin-top: 6px;">احسب السعرات والماكروز</button>
         </div>
 
-        <div class="field">
-            <label>هدفك</label>
-            <select id="userGoal">
-                <option value="gain">زيادة العضلات / تضخيم</option>
-                <option value="maintain">المحافظة على الوزن</option>
-                <option value="loss">خسارة الدهون</option>
-            </select>
+        <div id="resultBox" class="result-box">
+            <h4 style="text-align: center; color: var(--accent-purple); margin-bottom: 10px;">نتائجك الصحية الدقيقة 📊</h4>
+            <div class="result-row">
+                <span>مؤشر كتلة الجسم (BMI):</span>
+                <strong id="resBMI">-</strong>
+            </div>
+            <div class="result-row">
+                <span>معدل الأيض الأساسي (BMR):</span>
+                <strong id="resBMR">- سعرة</strong>
+            </div>
+            <div class="result-row">
+                <span>السعرات المستهدفة:</span>
+                <strong id="resTDEE" style="color: #4ade80;">- سعرة</strong>
+            </div>
+            <div class="result-row">
+                <span>البروتين اليومي:</span>
+                <strong id="resProtein">- جرام</strong>
+            </div>
+            <div class="result-row">
+                <span>الكاربوهيدرات:</span>
+                <strong id="resCarbs">- جرام</strong>
+            </div>
+            <div class="result-row">
+                <span>الدهون الصحية:</span>
+                <strong id="resFats">- جرام</strong>
+            </div>
+            <div class="result-row">
+                <span>احتياج الماء:</span>
+                <strong id="resWater" style="color: #38bdf8;">- لتر</strong>
+            </div>
         </div>
-
-        <div class="field">
-            <label>نشاطك اليومي</label>
-            <select id="activity">
-                <option value="1.2">قليل الحركة</option>
-                <option value="1.375">نشاط خفيف</option>
-                <option value="1.55" selected>نشاط متوسط</option>
-                <option value="1.725">نشاط مرتفع</option>
-                <option value="1.9">نشاط مرتفع جدًا</option>
-            </select>
-        </div>
-
-        <button class="primary-btn" onclick="createProfile()">
-            ابدأ الآن 🚀
-        </button>
-
     </div>
-</div>
 
-
-<!-- =========================
-     MAIN APP
-========================= -->
-
-<section id="mainApp" class="hidden">
-
-    <header class="header">
-
-        <div class="user-info">
-            <img
-                src="nony-giri.jpg"
-                class="avatar"
-                alt="Nony"
-            >
-
-            <div>
-                <h2 id="welcomeName">أهلًا 👋</h2>
-                <p>Nony Fitness & Nutrition</p>
-            </div>
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('startScreen')">
+            <div>🏠</div>
+            <div>البداية</div>
         </div>
-
-        <div class="header-actions">
-            <button class="icon-btn" onclick="openProfile()">⚙️</button>
+        <div class="nav-item" onclick="showScreen('dashboardScreen')">
+            <div>📊</div>
+            <div>الرئيسية</div>
         </div>
-
-    </header>
-
-
-    <!-- =========================
-         HOME
-    ========================= -->
-
-    <main id="homeTab" class="tab active">
-
-        <div class="content">
-
-            <div class="hero-card">
-
-                <div class="hero-label">
-                    Nutrition 🍽️
-                </div>
-
-                <h1>وجباتي</h1>
-
-                <p>
-                    اكتب لي وش أكلت، والتطبيق يحسب لك السعرات
-                    والبروتين والكارب والدهون تلقائيًا.
-                </p>
-
-                <button class="primary-btn" onclick="openMealModal()">
-                    + إضافة وجبة
-                </button>
-
-            </div>
-
-
-            <div class="calorie-card">
-
-                <div class="section-title">
-                    <h2>سعرات اليوم</h2>
-                    <span id="calorieGoalText">0 kcal</span>
-                </div>
-
-                <div class="calorie-number">
-                    <strong id="todayCalories">0</strong>
-                    <span>kcal</span>
-                </div>
-
-                <div class="progress">
-                    <div id="calorieProgress" class="progress-fill"></div>
-                </div>
-
-            </div>
-
-
-            <div class="macros">
-
-                <div class="macro">
-                    <div class="macro-icon">🥩</div>
-                    <strong id="todayProtein">0g</strong>
-                    <span>بروتين</span>
-                </div>
-
-                <div class="macro">
-                    <div class="macro-icon">🍚</div>
-                    <strong id="todayCarbs">0g</strong>
-                    <span>كارب</span>
-                </div>
-
-                <div class="macro">
-                    <div class="macro-icon">🥑</div>
-                    <strong id="todayFat">0g</strong>
-                    <span>دهون</span>
-                </div>
-
-            </div>
-
-
-            <div class="section-title">
-                <h2>وجبات اليوم</h2>
-                <span id="mealCount">0 وجبة</span>
-            </div>
-
-            <div id="mealList"></div>
-
+        <div class="nav-item active" onclick="showScreen('workoutScreen')">
+            <div>🏋️‍♀️</div>
+            <div>التمارين</div>
         </div>
-
-    </main>
-
-
-    <!-- =========================
-         WORKOUT TAB
-    ========================= -->
-
-    <main id="workoutTab" class="tab">
-
-        <div class="content">
-
-            <div class="hero-card">
-
-                <div class="hero-label">
-                    Training 🏋️
-                </div>
-
-                <h1>جدول التمارين</h1>
-
-                <p>
-                    برنامج واضح مع المجموعات والتكرارات والتكنيك،
-                    واحفظ وزنك لكل تمرين.
-                </p>
-
-            </div>
-
-            <div id="workoutList"></div>
-
+        <div class="nav-item" onclick="showScreen('calcScreen')">
+            <div>🧮</div>
+            <div>الحاسبة</div>
         </div>
-
-    </main>
-
-
-    <!-- =========================
-         PROFILE TAB
-    ========================= -->
-
-    <main id="profileTab" class="tab">
-
-        <div class="content">
-
-            <div class="section-title">
-                <h2>ملفي</h2>
-            </div>
-
-            <div class="profile-summary">
-
-                <div class="profile-row">
-                    <span>الاسم</span>
-                    <strong id="profileName">-</strong>
-                </div>
-
-                <div class="profile-row">
-                    <span>العمر</span>
-                    <strong id="profileAge">-</strong>
-                </div>
-
-                <div class="profile-row">
-                    <span>الوزن</span>
-                    <strong id="profileWeight">-</strong>
-                </div>
-
-                <div class="profile-row">
-                    <span>الطول</span>
-                    <strong id="profileHeight">-</strong>
-                </div>
-
-                <div class="profile-row">
-                    <span>الهدف</span>
-                    <strong id="profileGoal">-</strong>
-                </div>
-
-                <div class="profile-row">
-                    <span>احتياجك اليومي</span>
-                    <strong id="profileCalories">-</strong>
-                </div>
-
-            </div>
-
-            <button class="primary-btn" onclick="openRegister(true)">
-                تعديل البيانات
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="resetApp()"
-            >
-                حذف بيانات التطبيق
-            </button>
-
-        </div>
-
-    </main>
-
-
-    <!-- =========================
-         BOTTOM NAV
-    ========================= -->
-
-    <nav class="bottom-nav">
-
-        <button
-            class="nav-btn active"
-            onclick="switchTab('home',this)"
-        >
-            <span class="nav-icon">🏠</span>
-            الرئيسية
-        </button>
-
-        <button
-            class="nav-btn"
-            onclick="switchTab('workout',this)"
-        >
-            <span class="nav-icon">🏋️</span>
-            التمارين
-        </button>
-
-        <button
-            class="nav-btn"
-            onclick="openMealModal()"
-        >
-            <span class="nav-icon">➕</span>
-            وجبة
-        </button>
-
-        <button
-            class="nav-btn"
-            onclick="switchTab('profile',this)"
-        >
-            <span class="nav-icon">👤</span>
-            حسابي
-        </button>
-
-    </nav>
-
-</section>
-
-
-<!-- =========================
-     ADD MEAL MODAL
-========================= -->
-
-<div id="mealModal" class="modal">
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-
-            <div>
-                <h2>إضافة وجبة 🍽️</h2>
-            </div>
-
-            <button
-                class="close"
-                onclick="closeModal('mealModal')"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                اكتب وش أكلت
-            </label>
-
-            <textarea
-                id="mealText"
-                placeholder="مثال:
-صدر دجاج 200 جرام + رز أبيض 300 جرام
-
-أو:
-3 بيض + خبز توست 2 شريحة + موزة"
-            ></textarea>
-
-            <div class="helper">
-                اكتب اسم الأكل والكمية بالجرام أو العدد.
-                التطبيق يتعرف على الأطعمة الموجودة في قاعدة البيانات
-                ويحسب القيم الغذائية تلقائيًا.
-            </div>
-
-        </div>
-
-
-        <button
-            class="primary-btn"
-            onclick="analyzeMeal()"
-        >
-            احسب الوجبة 🔍
-        </button>
-
-
-        <div id="analyzeResult" class="analyze-result">
-
-            <div class="result-card">
-
-                <h3 id="resultMealName">
-                    الوجبة
-                </h3>
-
-                <div class="result-total">
-                    <span id="resultCalories">0</span>
-                    kcal
-                </div>
-
-                <div class="result-macros">
-
-                    <div>
-                        <strong id="resultProtein">0g</strong>
-                        <span>بروتين</span>
-                    </div>
-
-                    <div>
-                        <strong id="resultCarbs">0g</strong>
-                        <span>كارب</span>
-                    </div>
-
-                    <div>
-                        <strong id="resultFat">0g</strong>
-                        <span>دهون</span>
-                    </div>
-
-                </div>
-
-                <br>
-
-                <button
-                    class="primary-btn"
-                    onclick="saveAnalyzedMeal()"
-                >
-                    إضافة الوجبة للقائمة ✅
-                </button>
-
-            </div>
-
-        </div>
-
     </div>
 
 </div>
-
-
-<!-- =========================
-     TOAST
-========================= -->
-
-<div id="toast" class="toast"></div>
-
-</div>
-
 
 <script>
+    // التنقل بين الشاشات
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.classList.remove('active');
+        });
+        document.getElementById(screenId).classList.add('active');
 
-/* =====================================================
-   DATABASE
-   قيم تقريبية لكل 100 جرام
-===================================================== */
-
-const foods = {
-
-    "صدر دجاج":{
-        calories:165,
-        protein:31,
-        carbs:0,
-        fat:3.6
-    },
-
-    "دجاج":{
-        calories:165,
-        protein:31,
-        carbs:0,
-        fat:3.6
-    },
-
-    "دجاج مشوي":{
-        calories:165,
-        protein:31,
-        carbs:0,
-        fat:3.6
-    },
-
-    "صدر دجاج مشوي":{
-        calories:165,
-        protein:31,
-        carbs:0,
-        fat:3.6
-    },
-
-    "رز":{
-        calories:130,
-        protein:2.7,
-        carbs:28,
-        fat:.3
-    },
-
-    "رز أبيض":{
-        calories:130,
-        protein:2.7,
-        carbs:28,
-        fat:.3
-    },
-
-    "أرز":{
-        calories:130,
-        protein:2.7,
-        carbs:28,
-        fat:.3
-    },
-
-    "أرز أبيض":{
-        calories:130,
-        protein:2.7,
-        carbs:28,
-        fat:.3
-    },
-
-    "لحم":{
-        calories:250,
-        protein:26,
-        carbs:0,
-        fat:17
-    },
-
-    "لحم مفروم":{
-        calories:250,
-        protein:26,
-        carbs:0,
-        fat:17
-    },
-
-    "بيض":{
-        calories:143,
-        protein:12.6,
-        carbs:0.7,
-        fat:9.5
-    },
-
-    "بيضة":{
-        calories:72,
-        protein:6.3,
-        carbs:.4,
-        fat:4.8,
-        unit:true
-    },
-
-    "بيضتين":{
-        calories:144,
-        protein:12.6,
-        carbs:.8,
-        fat:9.6,
-        unit:true
-    },
-
-    "تونة":{
-        calories:132,
-        protein:28,
-        carbs:0,
-        fat:1
-    },
-
-    "سلمون":{
-        calories:208,
-        protein:20,
-        carbs:0,
-        fat:13
-    },
-
-    "بطاطس":{
-        calories:77,
-        protein:2,
-        carbs:17,
-        fat:.1
-    },
-
-    "بطاطا":{
-        calories:77,
-        protein:2,
-        carbs:17,
-        fat:.1
-    },
-
-    "بطاطس مقلية":{
-        calories:312,
-        protein:3.4,
-        carbs:41,
-        fat:15
-    },
-
-    "خبز":{
-        calories:265,
-        protein:9,
-        carbs:49,
-        fat:3.2
-    },
-
-    "خبز عربي":{
-        calories:275,
-        protein:9,
-        carbs:55,
-        fat:1.2
-    },
-
-    "توست":{
-        calories:265,
-        protein:9,
-        carbs:49,
-        fat:3.2
-    },
-
-    "شوفان":{
-        calories:389,
-        protein:16.9,
-        carbs:66.3,
-        fat:6.9
-    },
-
-    "موز":{
-        calories:89,
-        protein:1.1,
-        carbs:22.8,
-        fat:.3
-    },
-
-    "موزة":{
-        calories:105,
-        protein:1.3,
-        carbs:27,
-        fat:.4,
-        unit:true
-    },
-
-    "تفاح":{
-        calories:52,
-        protein:.3,
-        carbs:14,
-        fat:.2
-    },
-
-    "فراولة":{
-        calories:32,
-        protein:.7,
-        carbs:7.7,
-        fat:.3
-    },
-
-    "حليب":{
-        calories:61,
-        protein:3.2,
-        carbs:4.8,
-        fat:3.3
-    },
-
-    "حليب كامل الدسم":{
-        calories:61,
-        protein:3.2,
-        carbs:4.8,
-        fat:3.3
-    },
-
-    "زبادي":{
-        calories:61,
-        protein:3.5,
-        carbs:4.7,
-        fat:3.3
-    },
-
-    "لبن":{
-        calories:61,
-        protein:3.3,
-        carbs:4.8,
-        fat:3.3
-    },
-
-    "فول":{
-        calories:110,
-        protein:7.6,
-        carbs:19.7,
-        fat:.4
-    },
-
-    "حمص":{
-        calories:166,
-        protein:8.9,
-        carbs:27.4,
-        fat:2.6
-    },
-
-    "عدس":{
-        calories:116,
-        protein:9,
-        carbs:20,
-        fat:.4
-    },
-
-    "فلافل":{
-        calories:333,
-        protein:13,
-        carbs:32,
-        fat:18
-    },
-
-    "زبدة الفول السوداني":{
-        calories:588,
-        protein:25,
-        carbs:20,
-        fat:50
-    },
-
-    "فول سوداني":{
-        calories:567,
-        protein:26,
-        carbs:16,
-        fat:49
-    },
-
-    "جبن":{
-        calories:350,
-        protein:22,
-        carbs:3,
-        fat:28
-    },
-
-    "أفوكادو":{
-        calories:160,
-        protein:2,
-        carbs:8.5,
-        fat:14.7
-    },
-
-    "زيت":{
-        calories:884,
-        protein:0,
-        carbs:0,
-        fat:100
+        // تحديث تفعيل أيقونات النافذة السفلية
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        if(screenId === 'startScreen') document.querySelectorAll('.nav-item')[0].classList.add('active');
+        if(screenId === 'dashboardScreen') document.querySelectorAll('.nav-item')[1].classList.add('active');
+        if(screenId === 'workoutScreen') document.querySelectorAll('.nav-item')[2].classList.add('active');
+        if(screenId === 'calcScreen') document.querySelectorAll('.nav-item')[3].classList.add('active');
     }
-};
 
+    // حفظ أوزان التمارين في متصفح المستخدم تلقائياً
+    function saveWorkout(id) {
+        const weight = document.getElementById('w_weight_' + id).value;
+        const reps = document.getElementById('w_reps_' + id).value;
+        
+        localStorage.setItem('nony_w_' + id, weight);
+        localStorage.setItem('nony_r_' + id, reps);
+        
+        alert('تم حفظ الوزن والتكرارات بنجاح يا نوني! 💪✨');
+    }
 
-/* =====================================================
-   WORKOUT DATABASE
-===================================================== */
-
-const workouts = [
-
-    {
-        day:"اليوم 1",
-        title:"Lower Body - الجزء السفلي",
-        exercises:[
-            {
-                name:"Squat",
-                sets:"4 × 8-10",
-                technique:"ثبت القدمين، افتح الركبتين مع اتجاه أصابع القدم، انزل بتحكم وحافظ على ظهرك ثابتًا."
-            },
-            {
-                name:"Romanian Deadlift",
-                sets:"3 × 10-12",
-                technique:"ادفع الحوض للخلف مع ثني بسيط للركبة وحافظ على الظهر محايدًا."
-            },
-            {
-                name:"Leg Press",
-                sets:"3 × 10-12",
-                technique:"ثبت الظهر على المقعد، انزل بالوزن بتحكم ولا تقفل الركبة بالكامل."
-            },
-            {
-                name:"Leg Curl",
-                sets:"3 × 12-15",
-                technique:"ثبت الحوض واضغط بالكعبين واسحب الوزن ببطء."
-            },
-            {
-                name:"Calf Raise",
-                sets:"4 × 12-15",
-                technique:"اصعد لأعلى نقطة، توقف لحظة، ثم انزل ببطء إلى تمدد كامل."
+    // استرجاع الأوزان المحفوظة عند فتح الصفحة
+    window.onload = function() {
+        for(let i = 1; i <= 4; i++) {
+            if(localStorage.getItem('nony_w_' + i)) {
+                document.getElementById('w_weight_' + i).value = localStorage.getItem('nony_w_' + i);
             }
-        ]
-    },
-
-    {
-        day:"اليوم 2",
-        title:"Upper Body - الجزء العلوي",
-        exercises:[
-            {
-                name:"Chest Press",
-                sets:"4 × 8-12",
-                technique:"ثبت الكتفين للخلف، انزل ببطء ثم ادفع للأعلى بدون قفل المرفق."
-            },
-            {
-                name:"Lat Pulldown",
-                sets:"4 × 8-12",
-                technique:"اسحب البار باتجاه أعلى الصدر مع إبقاء الجسم ثابتًا."
-            },
-            {
-                name:"Seated Row",
-                sets:"3 × 10-12",
-                technique:"اسحب بالمرفق للخلف واعصر عضلات الظهر في نهاية الحركة."
-            },
-            {
-                name:"Shoulder Press",
-                sets:"3 × 8-12",
-                technique:"حافظ على الجذع ثابتًا واضغط للأعلى بشكل متحكم."
-            },
-            {
-                name:"Lateral Raise",
-                sets:"3 × 12-15",
-                technique:"ارفع الذراعين حتى مستوى الكتف تقريبًا مع ثني خفيف للمرفق."
+            if(localStorage.getItem('nony_r_' + i)) {
+                document.getElementById('w_reps_' + i).value = localStorage.getItem('nony_r_' + i);
             }
-        ]
-    },
-
-    {
-        day:"اليوم 3",
-        title:"Glutes & Hamstrings",
-        exercises:[
-            {
-                name:"Hip Thrust",
-                sets:"4 × 8-12",
-                technique:"ادفع بالحوض للأعلى واضغط المؤخرة في أعلى الحركة بدون فرط تقويس الظهر."
-            },
-            {
-                name:"Bulgarian Split Squat",
-                sets:"3 × 8-12",
-                technique:"انزل بشكل مستقيم وحافظ على الركبة باتجاه أصابع القدم."
-            },
-            {
-                name:"Leg Curl",
-                sets:"3 × 10-15",
-                technique:"حافظ على الحوض ثابتًا وتحكم في النزول."
-            },
-            {
-                name:"Cable Kickback",
-                sets:"3 × 12-15",
-                technique:"حرك الرجل من مفصل الورك فقط ولا تلف الحوض."
-            }
-        ]
-    },
-
-    {
-        day:"اليوم 4",
-        title:"راحة واستشفاء",
-        exercises:[
-            {
-                name:"Walking",
-                sets:"20-30 دقيقة",
-                technique:"مشي خفيف إلى متوسط لتحريك الجسم والاستشفاء."
-            },
-            {
-                name:"Stretching",
-                sets:"10 دقائق",
-                technique:"تمدد خفيف بدون ألم، وركز على العضلات التي تمرنت عليها."
-            }
-        ]
-    },
-
-    {
-        day:"اليوم 5",
-        title:"Full Body",
-        exercises:[
-            {
-                name:"Goblet Squat",
-                sets:"3 × 10-12",
-                technique:"احمل الدمبل أمام الصدر، انزل بتحكم وادفع الأرض عند الصعود."
-            },
-            {
-                name:"Dumbbell Row",
-                sets:"3 × 10-12",
-                technique:"ثبت الظهر واسحب الدمبل بالمرفق نحو الورك."
-            },
-            {
-                name:"Dumbbell Bench Press",
-                sets:"3 × 8-12",
-                technique:"ثبت لوحي الكتف وانزل الدمبل بجانب الصدر."
-            },
-            {
-                name:"Romanian Deadlift",
-                sets:"3 × 10-12",
-                technique:"الحركة من الورك، والدمبل قريب من الجسم طوال التمرين."
-            }
-        ]
-    }
-
-];
-
-
-/* =====================================================
-   APP STATE
-===================================================== */
-
-let profile = JSON.parse(
-    localStorage.getItem("nonyProfile") || "null"
-);
-
-let meals = JSON.parse(
-    localStorage.getItem("nonyMeals") || "[]"
-);
-
-let savedWeights = JSON.parse(
-    localStorage.getItem("nonyWeights") || "{}"
-);
-
-let analyzedMeal = null;
-
-
-/* =====================================================
-   START
-===================================================== */
-
-window.addEventListener("DOMContentLoaded",()=>{
-
-    if(profile){
-
-        document.getElementById("startScreen")
-            .classList.add("hidden");
-
-        document.getElementById("mainApp")
-            .classList.remove("hidden");
-
-        updateDashboard();
-        renderWorkouts();
-
-    }
-
-});
-
-
-/* =====================================================
-   REGISTER
-===================================================== */
-
-function openRegister(edit=false){
-
-    document.getElementById("registerModal")
-        .classList.add("show");
-
-    if(edit && profile){
-
-        document.getElementById("userName").value =
-            profile.name || "";
-
-        document.getElementById("userAge").value =
-            profile.age || "";
-
-        document.getElementById("userGender").value =
-            profile.gender || "male";
-
-        document.getElementById("userWeight").value =
-            profile.weight || "";
-
-        document.getElementById("userHeight").value =
-            profile.height || "";
-
-        document.getElementById("userGoal").value =
-            profile.goal || "gain";
-
-        document.getElementById("activity").value =
-            profile.activity || "1.55";
-    }
-}
-
-
-function closeModal(id){
-
-    document.getElementById(id)
-        .classList.remove("show");
-
-}
-
-
-function createProfile(){
-
-    const name =
-        document.getElementById("userName").value.trim();
-
-    const age =
-        Number(document.getElementById("userAge").value);
-
-    const gender =
-        document.getElementById("userGender").value;
-
-    const weight =
-        Number(document.getElementById("userWeight").value);
-
-    const height =
-        Number(document.getElementById("userHeight").value);
-
-    const goal =
-        document.getElementById("userGoal").value;
-
-    const activity =
-        Number(document.getElementById("activity").value);
-
-
-    if(
-        !name ||
-        !age ||
-        !weight ||
-        !height
-    ){
-
-        showToast("عبّ كل البيانات أولًا");
-        return;
-    }
-
-
-    let bmr;
-
-    if(gender === "male"){
-
-        bmr =
-            10 * weight +
-            6.25 * height -
-            5 * age +
-            5;
-
-    }else{
-
-        bmr =
-            10 * weight +
-            6.25 * height -
-            5 * age -
-            161;
-    }
-
-
-    let calories =
-        bmr * activity;
-
-
-    if(goal === "gain"){
-        calories += 250;
-    }
-
-    if(goal === "loss"){
-        calories -= 300;
-    }
-
-
-    calories = Math.round(calories);
-
-
-    const protein =
-        Math.round(weight * 1.8);
-
-    const fat =
-        Math.round(weight * 0.8);
-
-    const carbs =
-        Math.max(
-            0,
-            Math.round(
-                (calories -
-                protein * 4 -
-                fat * 9) / 4
-            )
-        );
-
-
-    profile = {
-        name,
-        age,
-        gender,
-        weight,
-        height,
-        goal,
-        activity,
-        calories,
-        protein,
-        carbs,
-        fat
+        }
     };
 
-
-    localStorage.setItem(
-        "nonyProfile",
-        JSON.stringify(profile)
-    );
-
-
-    closeModal("registerModal");
-
-    document.getElementById("startScreen")
-        .classList.add("hidden");
-
-    document.getElementById("mainApp")
-        .classList.remove("hidden");
-
-
-    updateDashboard();
-    renderWorkouts();
-
-    showToast("تم إنشاء حسابك بنجاح 🎉");
-}
-
-
-function skipRegister(){
-
-    profile = {
-        name:"صديقي",
-        age:22,
-        gender:"male",
-        weight:70,
-        height:175,
-        goal:"maintain",
-        activity:1.55,
-        calories:2200,
-        protein:126,
-        carbs:250,
-        fat:70
-    };
-
-    localStorage.setItem(
-        "nonyProfile",
-        JSON.stringify(profile)
-    );
-
-    document.getElementById("startScreen")
-        .classList.add("hidden");
-
-    document.getElementById("mainApp")
-        .classList.remove("hidden");
-
-    updateDashboard();
-    renderWorkouts();
-}
-
-
-/* =====================================================
-   DASHBOARD
-===================================================== */
-
-function updateDashboard(){
-
-    if(!profile) return;
-
-
-    document.getElementById("welcomeName")
-        .textContent =
-        `أهلًا ${profile.name} 👋`;
-
-
-    document.getElementById("calorieGoalText")
-        .textContent =
-        `${profile.calories} kcal`;
-
-
-    const today = getTodayMeals();
-
-
-    let calories = 0;
-    let protein = 0;
-    let carbs = 0;
-    let fat = 0;
-
-
-    today.forEach(meal=>{
-
-        calories += Number(meal.calories) || 0;
-        protein += Number(meal.protein) || 0;
-        carbs += Number(meal.carbs) || 0;
-        fat += Number(meal.fat) || 0;
-
-    });
-
-
-    document.getElementById("todayCalories")
-        .textContent =
-        Math.round(calories);
-
-
-    document.getElementById("todayProtein")
-        .textContent =
-        `${Math.round(protein)}g`;
-
-
-    document.getElementById("todayCarbs")
-        .textContent =
-        `${Math.round(carbs)}g`;
-
-
-    document.getElementById("todayFat")
-        .textContent =
-        `${Math.round(fat)}g`;
-
-
-    let percentage =
-        profile.calories > 0
-        ? (calories / profile.calories) * 100
-        : 0;
-
-
-    percentage =
-        Math.min(100,Math.max(0,percentage));
-
-
-    document.getElementById("calorieProgress")
-        .style.width =
-        percentage + "%";
-
-
-    document.getElementById("mealCount")
-        .textContent =
-        `${today.length} وجبة`;
-
-
-    renderMeals();
-
-    updateProfile();
-}
-
-
-/* =====================================================
-   GET TODAY
-===================================================== */
-
-function getTodayMeals(){
-
-    const today =
-        new Date().toISOString().slice(0,10);
-
-    return meals.filter(
-        meal => meal.date === today
-    );
-}
-
-
-/* =====================================================
-   MEALS
-===================================================== */
-
-function openMealModal(){
-
-    document.getElementById("mealModal")
-        .classList.add("show");
-
-    document.getElementById("mealText")
-        .focus();
-
-}
-
-
-function analyzeMeal(){
-
-    const text =
-        document.getElementById("mealText")
-        .value
-        .trim();
-
-
-    if(!text){
-
-        showToast("اكتب وش أكلت أولًا 🍽️");
-        return;
-    }
-
-
-    const result =
-        calculateMeal(text);
-
-
-    if(result.items.length === 0){
-
-        showToast(
-            "ما تعرفت على الأكل. جرّب مثل: صدر دجاج 200 جرام + رز 300 جرام"
-        );
-
-        return;
-    }
-
-
-    analyzedMeal = {
-
-        name:text,
-
-        calories:result.calories,
-
-        protein:result.protein,
-
-        carbs:result.carbs,
-
-        fat:result.fat,
-
-        items:result.items
-
-    };
-
-
-    document.getElementById("resultMealName")
-        .textContent =
-        text;
-
-
-    document.getElementById("resultCalories")
-        .textContent =
-        Math.round(result.calories);
-
-
-    document.getElementById("resultProtein")
-        .textContent =
-        Math.round(result.protein) + "g";
-
-
-    document.getElementById("resultCarbs")
-        .textContent =
-        Math.round(result.carbs) + "g";
-
-
-    document.getElementById("resultFat")
-        .textContent =
-        Math.round(result.fat) + "g";
-
-
-    document.getElementById("analyzeResult")
-        .classList.add("show");
-
-}
-
-
-/* =====================================================
-   FOOD PARSER
-===================================================== */
-
-function calculateMeal(text){
-
-    let calories = 0;
-    let protein = 0;
-    let carbs = 0;
-    let fat = 0;
-
-    const items = [];
-
-    const normalized =
-        text
-        .replace(/كيلو/g,"1000 جرام")
-        .replace(/كجم/g,"1000 جرام")
-        .replace(/جرام/g,"غرام")
-        .replace(/غرامات/g,"غرام");
-
-
-    const lower =
-        normalized.toLowerCase();
-
-
-    Object.keys(foods).forEach(foodName=>{
-
-        if(!lower.includes(foodName.toLowerCase()))
+    // حسابات اللياقة والتغذية المتقدمة الدقيقة
+    function calculateFitness() {
+        const gender = document.getElementById('gender').value;
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const age = parseFloat(document.getElementById('age').value);
+        const activity = parseFloat(document.getElementById('activity').value);
+        const goal = document.getElementById('goal').value;
+
+        if (!weight || !height || !age) {
+            alert('الرجاء إدخال كافة البيانات بشكل صحيح');
             return;
-
-
-        const food =
-            foods[foodName];
-
-
-        let amount = 100;
-
-
-        const escaped =
-            foodName.replace(
-                /[.*+?^${}()|[\]\\]/g,
-                "\\$&"
-            );
-
-
-        const gramRegex =
-            new RegExp(
-                escaped +
-                "\\s*(\\d+(?:\\.\\d+)?)\\s*(?:غرام|جرام|g|غ)?",
-                "i"
-            );
-
-
-        const match =
-            normalized.match(gramRegex);
-
-
-        if(match){
-
-            amount =
-                Number(match[1]);
-
-        }else if(food.unit){
-
-            amount = 1;
-
-        }else{
-
-            const nearby =
-                normalized.match(
-                    new RegExp(
-                        "(\\d+(?:\\.\\d+)?)\\s*" +
-                        escaped,
-                        "i"
-                    )
-                );
-
-            if(nearby){
-                amount =
-                    Number(nearby[1]);
-            }
-
         }
 
+        const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
 
-        if(food.unit){
-
-            const multiplier =
-                amount;
-
-            calories +=
-                food.calories * multiplier;
-
-            protein +=
-                food.protein * multiplier;
-
-            carbs +=
-                food.carbs * multiplier;
-
-            fat +=
-                food.fat * multiplier;
-
-        }else{
-
-            const multiplier =
-                amount / 100;
-
-            calories +=
-                food.calories * multiplier;
-
-            protein +=
-                food.protein * multiplier;
-
-            carbs +=
-                food.carbs * multiplier;
-
-            fat +=
-                food.fat * multiplier;
-
+        let bmr = (10 * weight) + (6.25 * height) - (5 * age);
+        if (gender === 'male') {
+            bmr += 5;
+        } else {
+            bmr -= 161;
         }
 
+        let tdee = bmr * activity;
+        if (goal === 'lose') tdee -= 450;
+        else if (goal === 'gain') tdee += 300;
 
-        items.push({
-            name:foodName,
-            amount
-        });
+        const protein = (weight * 2.0).toFixed(0); 
+        const fats = ((tdee * 0.25) / 9).toFixed(0); 
+        const carbs = ((tdee - (protein * 4) - (fats * 9)) / 4).toFixed(0);
+        const water = ((weight * 35) / 1000).toFixed(1);
 
-    });
+        document.getElementById('resBMI').innerText = bmi;
+        document.getElementById('resBMR').innerText = Math.round(bmr) + " سعرة";
+        document.getElementById('resTDEE').innerText = Math.round(tdee) + " سعرة";
+        document.getElementById('resProtein').innerText = protein + " جم";
+        document.getElementById('resCarbs').innerText = carbs + " جم";
+        document.getElementById('resFats').innerText = fats + " جم";
+        document.getElementById('resWater').innerText = water + " لتر";
 
-
-    return {
-        calories,
-        protein,
-        carbs,
-        fat,
-        items
-    };
-
-}
-
-
-/* =====================================================
-   SAVE MEAL
-===================================================== */
-
-function saveAnalyzedMeal(){
-
-    if(!analyzedMeal){
-        return;
+        document.getElementById('resultBox').style.display = 'block';
     }
-
-
-    const today =
-        new Date().toISOString().slice(0,10);
-
-
-    meals.push({
-
-        id:Date.now(),
-
-        date:today,
-
-        name:analyzedMeal.name,
-
-        calories:Math.round(
-            analyzedMeal.calories
-        ),
-
-        protein:Math.round(
-            analyzedMeal.protein
-        ),
-
-        carbs:Math.round(
-            analyzedMeal.carbs
-        ),
-
-        fat:Math.round(
-            analyzedMeal.fat
-        )
-
-    });
-
-
-    localStorage.setItem(
-        "nonyMeals",
-        JSON.stringify(meals)
-    );
-
-
-    document.getElementById("mealText")
-        .value = "";
-
-
-    document.getElementById("analyzeResult")
-        .classList.remove("show");
-
-
-    analyzedMeal = null;
-
-
-    closeModal("mealModal");
-
-    updateDashboard();
-
-    showToast("تمت إضافة الوجبة ✅");
-
-}
-
-
-/* =====================================================
-   RENDER MEALS
-===================================================== */
-
-function renderMeals(){
-
-    const list =
-        document.getElementById("mealList");
-
-
-    const today =
-        getTodayMeals();
-
-
-    if(today.length === 0){
-
-        list.innerHTML = `
-            <div class="empty">
-                <div class="big">🍽️</div>
-                <strong>ما سجلت أي وجبة اليوم</strong>
-                <p>اكتب وش أكلت واضغط إضافة وجبة.</p>
-            </div>
-        `;
-
-        return;
-    }
-
-
-    list.innerHTML =
-        today.map(meal=>`
-
-        <div class="meal-card">
-
-            <div class="meal-icon">
-                🍽️
-            </div>
-
-            <div class="meal-details">
-
-                <h3>
-                    ${escapeHtml(meal.name)}
-                </h3>
-
-                <p>
-                    ${meal.calories} kcal
-                </p>
-
-                <div class="meal-stats">
-
-                    <span>
-                        🥩 ${meal.protein}g بروتين
-                    </span>
-
-                    <span>
-                        🍚 ${meal.carbs}g كارب
-                    </span>
-
-                    <span>
-                        🥑 ${meal.fat}g دهون
-                    </span>
-
-                </div>
-
-            </div>
-
-            <button
-                class="delete-btn"
-                onclick="deleteMeal(${meal.id})"
-            >
-                🗑️
-            </button>
-
-        </div>
-
-    `).join("");
-
-}
-
-
-function deleteMeal(id){
-
-    meals =
-        meals.filter(
-            meal=>meal.id !== id
-        );
-
-
-    localStorage.setItem(
-        "nonyMeals",
-        JSON.stringify(meals)
-    );
-
-
-    updateDashboard();
-
-    showToast("تم حذف الوجبة");
-
-}
-
-
-/* =====================================================
-   WORKOUTS
-===================================================== */
-
-function renderWorkouts(){
-
-    const container =
-        document.getElementById("workoutList");
-
-
-    container.innerHTML =
-        workouts.map((day,dayIndex)=>`
-
-        <div class="workout-card">
-
-            <div class="workout-head">
-
-                <div>
-                    <div class="workout-day">
-                        ${day.day}
-                    </div>
-
-                    <h3>
-                        ${day.title}
-                    </h3>
-
-                    <p>
-                        ${day.exercises.length} تمارين
-                    </p>
-                </div>
-
-                <span>🔥</span>
-
-            </div>
-
-
-            ${day.exercises.map((exercise,index)=>{
-
-                const key =
-                    `${dayIndex}-${index}`;
-
-                const saved =
-                    savedWeights[key] || "";
-
-
-                return `
-
-                    <div class="exercise">
-
-                        <div class="exercise-top">
-
-                            <div>
-                                <div class="exercise-name">
-                                    ${exercise.name}
-                                </div>
-
-                                <div class="exercise-info">
-                                    ${exercise.sets}
-                                </div>
-                            </div>
-
-                            <span>💪</span>
-
-                        </div>
-
-
-                        <div class="exercise-technique">
-                            <strong>التكنيك:</strong>
-                            ${exercise.technique}
-                        </div>
-
-
-                        <div class="weight-row">
-
-                            <input
-                                id="weight-${key}"
-                                type="number"
-                                step="0.5"
-                                placeholder="الوزن kg"
-                                value="${saved}"
-                            >
-
-                            <button
-                                class="save-weight"
-                                onclick="saveWeight('${key}')"
-                            >
-                                حفظ
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-            }).join("")}
-
-        </div>
-
-    `).join("");
-
-}
-
-
-function saveWeight(key){
-
-    const input =
-        document.getElementById(
-            `weight-${key}`
-        );
-
-
-    const value =
-        input.value;
-
-
-    if(!value){
-
-        showToast("اكتب الوزن أولًا");
-        return;
-    }
-
-
-    savedWeights[key] =
-        value;
-
-
-    localStorage.setItem(
-        "nonyWeights",
-        JSON.stringify(savedWeights)
-    );
-
-
-    showToast(
-        `تم حفظ وزنك: ${value} kg ✅`
-    );
-
-}
-
-
-/* =====================================================
-   PROFILE
-===================================================== */
-
-function updateProfile(){
-
-    if(!profile) return;
-
-
-    document.getElementById("profileName")
-        .textContent =
-        profile.name;
-
-
-    document.getElementById("profileAge")
-        .textContent =
-        profile.age + " سنة";
-
-
-    document.getElementById("profileWeight")
-        .textContent =
-        profile.weight + " kg";
-
-
-    document.getElementById("profileHeight")
-        .textContent =
-        profile.height + " cm";
-
-
-    let goalText =
-        "المحافظة";
-
-
-    if(profile.goal === "gain")
-        goalText =
-        "زيادة العضلات / تضخيم";
-
-
-    if(profile.goal === "loss")
-        goalText =
-        "خسارة الدهون";
-
-
-    document.getElementById("profileGoal")
-        .textContent =
-        goalText;
-
-
-    document.getElementById("profileCalories")
-        .textContent =
-        profile.calories + " kcal";
-
-}
-
-
-function openProfile(){
-
-    switchTab(
-        "profile",
-        document.querySelectorAll(".nav-btn")[3]
-    );
-
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function switchTab(tab,button){
-
-    document
-        .querySelectorAll(".tab")
-        .forEach(el=>{
-            el.classList.remove("active");
-        });
-
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(el=>{
-            el.classList.remove("active");
-        });
-
-
-    if(tab === "home"){
-
-        document
-            .getElementById("homeTab")
-            .classList.add("active");
-
-    }
-
-
-    if(tab === "workout"){
-
-        document
-            .getElementById("workoutTab")
-            .classList.add("active");
-
-    }
-
-
-    if(tab === "profile"){
-
-        document
-            .getElementById("profileTab")
-            .classList.add("active");
-
-    }
-
-
-    if(button){
-        button.classList.add("active");
-    }
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-function resetApp(){
-
-    if(
-        !confirm(
-            "متأكد أنك تريد حذف جميع بياناتك ووجباتك؟"
-        )
-    ){
-        return;
-    }
-
-
-    localStorage.removeItem("nonyProfile");
-    localStorage.removeItem("nonyMeals");
-    localStorage.removeItem("nonyWeights");
-
-
-    profile = null;
-    meals = [];
-    savedWeights = {};
-
-
-    location.reload();
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer;
-
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add("show");
-
-
-    clearTimeout(toastTimer);
-
-
-    toastTimer =
-        setTimeout(()=>{
-
-            toast.classList.remove("show");
-
-        },3000);
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHtml(text){
-
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =====================================================
-   CLOSE MODAL BY CLICKING OUTSIDE
-===================================================== */
-
-document
-    .querySelectorAll(".modal")
-    .forEach(modal=>{
-
-        modal.addEventListener(
-            "click",
-            function(e){
-
-                if(e.target === modal){
-                    modal.classList.remove("show");
-                }
-
-            }
-        );
-
-    });
-
-
-/* =====================================================
-   EXAMPLE:
-   
-   "صدر دجاج 200 جرام + رز أبيض 300 جرام"
-
-   الدجاج:
-   165 × 2 = 330 kcal
-   Protein = 31 × 2 = 62g
-
-   الرز:
-   130 × 3 = 390 kcal
-   Carbs = 28 × 3 = 84g
-
-   المجموع:
-   720 kcal تقريبًا
-   67g protein
-   84g carbs
-   8g fat تقريبًا
-===================================================== */
-
 </script>
 
 </body>
