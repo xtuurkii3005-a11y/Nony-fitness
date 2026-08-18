@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nony Fitness & Nutrition</title>
+    <title>Nony Fitness</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0b0712;
-            --card-bg: rgba(255, 255, 255, 0.06);
-            --card-border: rgba(255, 255, 255, 0.12);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
             --text-main: #ffffff;
             --text-sub: #a19bb5;
             --accent-purple: #a855f7;
             --accent-pink: #ec4899;
-            --accent-glow: rgba(168, 85, 247, 0.35);
+            --accent-glow: rgba(168, 85, 247, 0.3);
         }
 
         * {
@@ -32,23 +32,23 @@
             justify-content: center;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.18) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
             padding: 10px;
         }
 
         .app-container {
             width: 100%;
-            max-width: 420px;
-            background: rgba(18, 12, 28, 0.75);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            max-width: 410px;
+            background: rgba(15, 10, 25, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--card-border);
-            border-radius: 36px;
+            border-radius: 32px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             position: relative;
-            height: 820px;
+            height: 800px;
             display: flex;
             flex-direction: column;
         }
@@ -85,36 +85,36 @@
         }
 
         .hero-img {
-            width: 140px;
-            height: 140px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--accent-purple);
-            box-shadow: 0 0 30px var(--accent-glow);
-            margin-bottom: 20px;
+            box-shadow: 0 0 25px var(--accent-glow);
+            margin-bottom: 15px;
         }
 
         .title {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
             background: linear-gradient(135deg, #fff, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .subtitle {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-sub);
             margin-bottom: 25px;
         }
 
         .btn {
             width: 100%;
-            padding: 13px;
+            padding: 12px;
             border-radius: 14px;
             border: none;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
@@ -124,12 +124,12 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
             color: white;
-            box-shadow: 0 6px 20px var(--accent-glow);
+            box-shadow: 0 5px 15px var(--accent-glow);
         }
 
         .btn-primary:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .btn-outline {
@@ -149,12 +149,12 @@
         .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .user-avatar {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--accent-purple);
@@ -168,7 +168,7 @@
         }
 
         .stat-value {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: #fff;
             margin-top: 4px;
@@ -178,7 +178,7 @@
         .workout-card {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--card-border);
-            border-radius: 18px;
+            border-radius: 16px;
             padding: 14px;
             margin-bottom: 14px;
         }
@@ -186,16 +186,18 @@
         .workout-header {
             display: flex;
             gap: 12px;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 10px;
         }
 
-        .workout-icon {
-            width: 55px;
-            height: 55px;
-            border-radius: 14px;
+        .workout-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
             object-fit: cover;
             border: 1px solid var(--accent-purple);
+            flex-shrink: 0;
+            background: #000;
         }
 
         .workout-inputs {
@@ -259,7 +261,7 @@
 
         .input-control, select {
             width: 100%;
-            padding: 10px;
+            padding: 9px;
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--card-border);
             border-radius: 12px;
@@ -293,7 +295,7 @@
         .bottom-nav {
             display: flex;
             justify-content: space-around;
-            padding: 12px;
+            padding: 10px;
             background: rgba(10, 6, 18, 0.95);
             border-top: 1px solid var(--card-border);
             position: absolute;
@@ -322,16 +324,16 @@
 
     <!-- 1. شاشة البداية -->
     <div id="startScreen" class="screen active start-screen">
-        <img src="nony.jpg.png" alt="Nony Fitness" class="hero-img">
-        <h1 class="title">CardioCraze</h1>
-        <p class="subtitle">تطبيقك المتكامل للياقة، التغذية، ومتابعة الأوزان</p>
+        <img src="nony.jpg.png" alt="Nony" class="hero-img">
+        <h1 class="title">نوني - Nony</h1>
+        <p class="subtitle">تطبيقك الرياضي الشخصي المتكامل</p>
         
         <button class="btn btn-primary" onclick="showScreen('dashboardScreen')">الدخول للتطبيق</button>
         <button class="btn btn-outline" onclick="showScreen('workoutScreen')">جدول تمارين البنات 🏋️‍♀️</button>
         <button class="btn btn-outline" onclick="showScreen('calcScreen')">حاسبة السعرات الدقيقة 🧮</button>
     </div>
 
-    <!-- 2. لوحة التحكم -->
+    <!-- 2. لوحة التحكم (الرئيسية) -->
     <div id="dashboardScreen" class="screen">
         <div class="dash-header">
             <div class="user-info">
@@ -378,18 +380,18 @@
         </div>
     </div>
 
-    <!-- 3. شاشة جدول تمارين البنات مع حفظ الأوزان والتكرارات -->
+    <!-- 3. شاشة جدول تمارين البنات (مع مقاطع فيديو متحركة GIF وشرح وحفظ الأوزان) -->
     <div id="workoutScreen" class="screen">
         <h3 class="title" style="font-size: 18px; text-align: center; margin-bottom: 4px;">جدول تمارين البنات لشد الجسم</h3>
-        <p class="subtitle" style="text-align: center; margin-bottom: 16px;">سجّلي أوزانك وتكراراتك لكل تمرين لتحاملي تقدمك</p>
+        <p class="subtitle" style="text-align: center; margin-bottom: 16px;">شاهدي مقطع الحركة الصحيحة وسجّلي أوزانك وتكراراتك</p>
 
         <!-- تمرين 1 -->
         <div class="workout-card">
             <div class="workout-header">
-                <img src="nony.jpg.png" alt="Squat" class="workout-icon">
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=300&q=80" alt="Squat GIF" class="workout-img">
                 <div>
-                    <h4 style="font-size: 14px; color: #fff;">1. سكوات بالأوزان (Barbell / Dumbbell Squat)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: الأرجل، المؤخرة، والشد السفلي. انزلي ببطء واصعدي بقوة.</p>
+                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">1. سكوات بالأوزان (Barbell Squat)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> الأرجل والمؤخرة. انزلي ببطء واجعلي ركبتيك باتجاه أطراف القدمين.</p>
                 </div>
             </div>
             <div class="workout-inputs">
@@ -408,10 +410,10 @@
         <!-- تمرين 2 -->
         <div class="workout-card">
             <div class="workout-header">
-                <img src="nony.jpg.png" alt="Hip Thrust" class="workout-icon">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=300&q=80" alt="Hip Thrust GIF" class="workout-img">
                 <div>
-                    <h4 style="font-size: 14px; color: #fff;">2. هيب ثرست (Hip Thrust)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: عضلات المؤخرة والأرداف بشكل مباشر وعالي الفعالية.</p>
+                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">2. هيب ثرست (Hip Thrust)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> عضلات المؤخرة والأرداف. اعصري المؤخرة بقوة في الأعلى.</p>
                 </div>
             </div>
             <div class="workout-inputs">
@@ -430,10 +432,10 @@
         <!-- تمرين 3 -->
         <div class="workout-card">
             <div class="workout-header">
-                <img src="nony.jpg.png" alt="RDL" class="workout-icon">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=300&q=80" alt="RDL GIF" class="workout-img">
                 <div>
-                    <h4 style="font-size: 14px; color: #fff;">3. رومانيان ديدليفت (Romanian Deadlift)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: الخلفيات (Hamstrings) وشد الظهر السفلي.</p>
+                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">3. رومانيان ديدليفت (RDL)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> الأرجل الخلفية وأسفل الظهر. حافظي على استقامة ظهرك.</p>
                 </div>
             </div>
             <div class="workout-inputs">
@@ -452,10 +454,10 @@
         <!-- تمرين 4 -->
         <div class="workout-card">
             <div class="workout-header">
-                <img src="nony.jpg.png" alt="Lat Pulldown" class="workout-icon">
+                <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=300&q=80" alt="Lat Pulldown GIF" class="workout-img">
                 <div>
-                    <h4 style="font-size: 14px; color: #fff;">4. سحب ظهر علوي (Lat Pulldown)</h4>
-                    <p style="font-size: 11px; color: var(--text-sub);">التركيز: عضلات الظهر العلوية لخصر منحتد وقوام مشدود.</p>
+                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 2px;">4. سحب ظهر علوي (Lat Pulldown)</h4>
+                    <p style="font-size: 11px; color: var(--text-sub); line-height: 1.4;"><span style="color:#d8b4fe;">التركيز:</span> عضلات الظهر العلوية لخصر منحوت وقوام مشدود.</p>
                 </div>
             </div>
             <div class="workout-inputs">
